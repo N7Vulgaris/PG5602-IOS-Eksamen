@@ -9,9 +9,18 @@ import SwiftUI
 
 @main
 struct RatatouilleApp: App {
+    @State var splashCreenSsActive = true
+    
+    
     var body: some Scene {
         WindowGroup {
-            ContentView()
+            if splashCreenSsActive {
+                SplashScreenView(isActive: $splashCreenSsActive)
+            } else {
+                TabView {
+                    
+                }
+            }
         }
     }
 }
