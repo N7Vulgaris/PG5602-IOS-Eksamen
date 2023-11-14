@@ -19,7 +19,7 @@ struct RatatouilleApp: App {
             } else {
                 
                 TabView {
-                    MyRecipesView()
+                    MyRecipesView(myRecipes: MyRecipes.demoRecipes)
                         .tabItem {
                             Label("Mine oppskrifter", systemImage: "fork.knife.circle")
                         }

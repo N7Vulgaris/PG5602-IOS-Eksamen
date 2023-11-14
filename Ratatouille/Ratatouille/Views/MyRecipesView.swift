@@ -8,11 +8,34 @@
 import SwiftUI
 
 struct MyRecipesView: View {
+    
+    @State var myRecipes: [MyRecipes]
+    
     var body: some View {
-        Text("My Recipes!")
+        
+        if myRecipes.isEmpty {
+            VStack {
+                Image(systemName: "square.stack.3d.up.slash")
+                    .scaleEffect(2.5)
+                    .padding(.bottom)
+                Text("Ingen matoppskrifter")
+                    .font(.system(size: 25))
+            }
+        } else {
+            ScrollView {
+                ForEach(myRecipes) { recipe in
+                    VStack {
+                        Text("\(recipe.recipeName)")
+                    }
+                }
+            }
+        }
+        
     }
+    
+    
 }
 
 #Preview {
-    MyRecipesView()
+    MyRecipesView(myRecipes: MyRecipes.demoRecipes)
 }
