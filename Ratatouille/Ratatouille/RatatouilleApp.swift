@@ -18,6 +18,8 @@ struct RatatouilleApp: App {
                 SplashScreenView(isActive: $splashCreenSsActive)
             } else {
                 
+                Text("Ratatouille")
+                
                 TabView {
                     MyRecipesView(myRecipes: MyRecipes.demoRecipes)
                         .tabItem {

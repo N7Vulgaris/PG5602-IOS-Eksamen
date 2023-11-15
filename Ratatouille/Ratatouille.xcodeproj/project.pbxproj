@@ -18,6 +18,7 @@
 		3122A08B2B0295D50084FD0B /* RatatouilleTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3122A08A2B0295D50084FD0B /* RatatouilleTests.swift */; };
 		3122A0952B0295D50084FD0B /* RatatouilleUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3122A0942B0295D50084FD0B /* RatatouilleUITests.swift */; };
 		3122A0972B0295D50084FD0B /* RatatouilleUITestsLaunchTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3122A0962B0295D50084FD0B /* RatatouilleUITestsLaunchTests.swift */; };
+		31FA622A2B0511DF00BE8087 /* RecipeListItemView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 31FA62292B0511DF00BE8087 /* RecipeListItemView.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -52,6 +53,7 @@
 		3122A0902B0295D50084FD0B /* RatatouilleUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = RatatouilleUITests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		3122A0942B0295D50084FD0B /* RatatouilleUITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RatatouilleUITests.swift; sourceTree = "<group>"; };
 		3122A0962B0295D50084FD0B /* RatatouilleUITestsLaunchTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RatatouilleUITestsLaunchTests.swift; sourceTree = "<group>"; };
+		31FA62292B0511DF00BE8087 /* RecipeListItemView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RecipeListItemView.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -108,6 +110,7 @@
 				31049AEC2B03EDFC00688581 /* MyRecipesView.swift */,
 				31049AEE2B03EE1700688581 /* SearchView.swift */,
 				31049AF02B03EE2600688581 /* SettingsView.swift */,
+				31FA62292B0511DF00BE8087 /* RecipeListItemView.swift */,
 			);
 			path = Views;
 			sourceTree = "<group>";
@@ -302,6 +305,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				31049AEF2B03EE1700688581 /* SearchView.swift in Sources */,
+				31FA622A2B0511DF00BE8087 /* RecipeListItemView.swift in Sources */,
 				3122A07A2B0295D40084FD0B /* RatatouilleApp.swift in Sources */,
 				31049AF12B03EE2600688581 /* SettingsView.swift in Sources */,
 				31049AF32B04011700688581 /* MyRecipes.swift in Sources */,

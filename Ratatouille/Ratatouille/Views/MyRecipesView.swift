@@ -22,15 +22,15 @@ struct MyRecipesView: View {
                     .font(.system(size: 25))
             }
         } else {
-            ScrollView {
-                ForEach(myRecipes) { recipe in
-                    VStack {
-                        Text("\(recipe.recipeName)")
+            Form {
+                ScrollView() {
+                    ForEach(myRecipes) { recipe in
+                        RecipeListItemView(recipe: recipe)
                     }
                 }
+                .defaultScrollAnchor(.bottom)
             }
         }
-        
     }
     
     
