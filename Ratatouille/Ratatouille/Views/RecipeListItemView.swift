@@ -9,8 +9,8 @@ import SwiftUI
 
 struct RecipeListItemView: View {
     
-    var recipe: MyRecipes
-    @State var isFavorited: Bool = false
+    @State var recipe: Binding<MyRecipes>
+//    @State var isFavorited: Bool = false
     
     var body: some View {
         HStack {
@@ -18,17 +18,22 @@ struct RecipeListItemView: View {
                 Circle().fill(.blue.gradient) // TODO: Maybe make function to generate random color
                     .scaledToFit()
                     .frame(width: 60)
-                Image(systemName: recipe.recipeImage)
+                Image(systemName: recipe.wrappedValue.recipeImage)
             }
             VStack(alignment: .leading) {
-                    Text("\(recipe.recipeName)")
-                    Text("\(recipe.recipeCategpry)")
+                Text("\(recipe.wrappedValue.recipeName)")
+                Text("\(recipe.wrappedValue.recipeCategpry)")
                 }
             Spacer()
             
-            if isFavorited {
+            if recipe.wrappedValue.recipeIsFavorited == true {
                 Image(systemName: "star.fill")
                     .padding(.horizontal)
+                    .foregroundStyle(.yellow)
+            } else {
+                Image(systemName: "star.fill")
+                    .padding(.horizontal)
+                    .foregroundStyle(.green)
             }
             
             Image(systemName: "chevron.right")
@@ -40,5 +45,5 @@ struct RecipeListItemView: View {
 }
 
 #Preview {
-    RecipeListItemView(recipe: MyRecipes(id: 4, recipeName: "Pannekaker", recipeImage: "carrot.fill", recipeCategpry: "Breakfast"))
+    RecipeListItemView(recipe: .constant(MyRecipes.init(id: 90, recipeName: "Vaffler", recipeImage: "carrot.fill", recipeCategpry: "Dessert", recipeIsFavorited: true)))
 }

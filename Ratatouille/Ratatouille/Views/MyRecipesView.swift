@@ -9,19 +9,29 @@ import SwiftUI
 
 struct MyRecipesView: View {
     
-    @State var myRecipes: [MyRecipes]
-    
-    func archiveRecipe(reciepName: String) {
-        print("Archive \(reciepName)!")
+    init(savedRecipes: Binding<[MyRecipes]>, archivedRecipes: Binding<[MyRecipes]>) {
+        self.savedRecipes = savedRecipes
+        self.archivedRecipes = archivedRecipes
     }
     
-    func favoriteRecipe(reciepName: String) {
-        print("Favorite \(reciepName)!")
+    
+    
+    @State var savedRecipes: Binding<[MyRecipes]>
+    @State var archivedRecipes: Binding<[MyRecipes]>
+    
+    func archiveRecipe(recipe: MyRecipes) {
+//        var hasRemoved = false
+    }
+    
+    func favoriteRecipe(recipe: Binding<MyRecipes>) {
+        // TODO: get this shit working -> recipe.recipeIsFavorited = !recipe.recipeIsFavorited
+        recipe.wrappedValue.recipeIsFavorited = !recipe.wrappedValue.recipeIsFavorited
+        print(recipe.wrappedValue.recipeIsFavorited)
     }
     
     var body: some View {
         
-        if myRecipes.isEmpty {
+        if savedRecipes.isEmpty {
             VStack {
                 Image(systemName: "square.stack.3d.up.slash")
                     .scaleEffect(2.5)
@@ -31,19 +41,33 @@ struct MyRecipesView: View {
             }
         } else {
             List {
-                ForEach(myRecipes) { recipe in
+                ForEach(savedRecipes) { recipe in
                     RecipeListItemView(recipe: recipe)
                         .swipeActions(edge: .leading, allowsFullSwipe: true) {
-                            Button("Favoritt") {
-                                favoriteRecipe(reciepName: recipe.recipeName)
-                            }
-                            .tint(.yellow)
+                            Button(action: {
+                                favoriteRecipe(recipe: recipe)
+                            }, label: {
+                                Image(systemName: "star.fill")
+                                    .tint(.yellow)
+                            })
+                            
+//                            Button("Favoritt") {
+//                                favoriteRecipe(reciepName: recipe.recipeName)
+//                            }
+//                            .tint(.yellow)
                         }
                         .swipeActions(edge: .trailing, allowsFullSwipe: true) {
-                            Button("Arkiver") {
-                                archiveRecipe(reciepName: recipe.recipeName)
-                            }
-                            .tint(.blue)
+                            Button(action: {
+                                archiveRecipe(recipe: recipe.wrappedValue)
+                            }, label: {
+                                Image(systemName: "xmark.bin.fill")
+                                    .tint(.blue)
+                            })
+                        
+//                            Button("Arkiver") {
+//                                archiveRecipe(reciepName: recipe.recipeName)
+//                            }
+//                            .tint(.blue)
                         }
                 }
             }
@@ -54,5 +78,7 @@ struct MyRecipesView: View {
 }
 
 #Preview {
-    MyRecipesView(myRecipes: MyRecipes.demoRecipes)
+    MyRecipesView(savedRecipes: .constant([MyRecipes.init(id: 5, recipeName: "Kylling", recipeImage: "carrot.fill", recipeCategpry: "Dinner", recipeIsFavorited: true)]), archivedRecipes: .constant([
+        MyRecipes.init(id: 99, recipeName: "Pølser", recipeImage: "carrot.fill", recipeCategpry: "Lunch", recipeIsFavorited: false)
+    ]))
 }

@@ -11,6 +11,8 @@ import SwiftUI
 struct RatatouilleApp: App {
     @State var splashCreenSsActive = true
     
+    @State var savedRecipes: [MyRecipes] = MyRecipes.demoRecipes
+    @State var archivedRecipes = [MyRecipes]()
     
     var body: some Scene {
         WindowGroup {
@@ -21,7 +23,7 @@ struct RatatouilleApp: App {
                 Text("Ratatouille")
                 
                 TabView {
-                    MyRecipesView(myRecipes: MyRecipes.demoRecipes)
+                    MyRecipesView(savedRecipes: $savedRecipes, archivedRecipes: $archivedRecipes)
                         .tabItem {
                             Label("Mine oppskrifter", systemImage: "fork.knife.circle")
                         }
