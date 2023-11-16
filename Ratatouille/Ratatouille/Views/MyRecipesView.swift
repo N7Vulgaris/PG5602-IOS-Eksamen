@@ -11,6 +11,14 @@ struct MyRecipesView: View {
     
     @State var myRecipes: [MyRecipes]
     
+    func archiveRecipe(reciepName: String) {
+        print("Archive \(reciepName)!")
+    }
+    
+    func favoriteRecipe(reciepName: String) {
+        print("Favorite \(reciepName)!")
+    }
+    
     var body: some View {
         
         if myRecipes.isEmpty {
@@ -22,13 +30,22 @@ struct MyRecipesView: View {
                     .font(.system(size: 25))
             }
         } else {
-            Form {
-                ScrollView() {
-                    ForEach(myRecipes) { recipe in
-                        RecipeListItemView(recipe: recipe)
-                    }
+            List {
+                ForEach(myRecipes) { recipe in
+                    RecipeListItemView(recipe: recipe)
+                        .swipeActions(edge: .leading, allowsFullSwipe: true) {
+                            Button("Favoritt") {
+                                favoriteRecipe(reciepName: recipe.recipeName)
+                            }
+                            .tint(.yellow)
+                        }
+                        .swipeActions(edge: .trailing, allowsFullSwipe: true) {
+                            Button("Arkiver") {
+                                archiveRecipe(reciepName: recipe.recipeName)
+                            }
+                            .tint(.blue)
+                        }
                 }
-                .defaultScrollAnchor(.bottom)
             }
         }
     }

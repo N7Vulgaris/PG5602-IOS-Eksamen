@@ -35,7 +35,7 @@ struct RecipeListItemView: View {
             
         }
         .padding(.vertical)
-        Divider()
+//        Divider()
     }
 }
 
