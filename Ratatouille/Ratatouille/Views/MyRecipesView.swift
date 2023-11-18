@@ -14,13 +14,23 @@ struct MyRecipesView: View {
         self.archivedRecipes = archivedRecipes
     }
     
-    
-    
+    // TODO: Figure out if I use @State or @Binding
     @State var savedRecipes: Binding<[MyRecipes]>
     @State var archivedRecipes: Binding<[MyRecipes]>
     
-    func archiveRecipe(recipe: MyRecipes) {
-//        var hasRemoved = false
+    func archiveRecipe(recipe: Binding<MyRecipes>) {
+        // TODO: ALSO get this shit working:
+        var hasRemoved = false
+        archivedRecipes.wrappedValue.append(recipe.wrappedValue)
+        savedRecipes.wrappedValue.removeAll { filteredRecipe in
+            if filteredRecipe.recipeName == recipe.wrappedValue.recipeName, hasRemoved == false {
+                hasRemoved = true
+                print("delte")
+                return true
+            }
+            print("no delte")
+            return false
+        }
     }
     
     func favoriteRecipe(recipe: Binding<MyRecipes>) {
@@ -50,24 +60,14 @@ struct MyRecipesView: View {
                                 Image(systemName: "star.fill")
                                     .tint(.yellow)
                             })
-                            
-//                            Button("Favoritt") {
-//                                favoriteRecipe(reciepName: recipe.recipeName)
-//                            }
-//                            .tint(.yellow)
                         }
                         .swipeActions(edge: .trailing, allowsFullSwipe: true) {
                             Button(action: {
-                                archiveRecipe(recipe: recipe.wrappedValue)
+                                archiveRecipe(recipe: recipe)
                             }, label: {
                                 Image(systemName: "xmark.bin.fill")
                                     .tint(.blue)
                             })
-                        
-//                            Button("Arkiver") {
-//                                archiveRecipe(reciepName: recipe.recipeName)
-//                            }
-//                            .tint(.blue)
                         }
                 }
             }

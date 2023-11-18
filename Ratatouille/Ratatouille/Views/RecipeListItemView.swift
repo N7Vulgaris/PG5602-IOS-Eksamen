@@ -9,6 +9,13 @@ import SwiftUI
 
 struct RecipeListItemView: View {
     
+//    var swipeLeft: (() -> ())
+//    var swipeRight: (() -> ())
+    
+    init(recipe: Binding<MyRecipes>) {
+        self.recipe = recipe
+    }
+    
     @State var recipe: Binding<MyRecipes>
 //    @State var isFavorited: Bool = false
     
