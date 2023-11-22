@@ -18,6 +18,7 @@
 		3122A08B2B0295D50084FD0B /* RatatouilleTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3122A08A2B0295D50084FD0B /* RatatouilleTests.swift */; };
 		3122A0952B0295D50084FD0B /* RatatouilleUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3122A0942B0295D50084FD0B /* RatatouilleUITests.swift */; };
 		3122A0972B0295D50084FD0B /* RatatouilleUITestsLaunchTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3122A0962B0295D50084FD0B /* RatatouilleUITestsLaunchTests.swift */; };
+		314AEDF22B0CF06D00BCFCB5 /* RecipesAPIClient.swift in Sources */ = {isa = PBXBuildFile; fileRef = 314AEDF12B0CF06D00BCFCB5 /* RecipesAPIClient.swift */; };
 		31FA622A2B0511DF00BE8087 /* RecipeListItemView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 31FA62292B0511DF00BE8087 /* RecipeListItemView.swift */; };
 /* End PBXBuildFile section */
 
@@ -53,6 +54,7 @@
 		3122A0902B0295D50084FD0B /* RatatouilleUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = RatatouilleUITests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		3122A0942B0295D50084FD0B /* RatatouilleUITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RatatouilleUITests.swift; sourceTree = "<group>"; };
 		3122A0962B0295D50084FD0B /* RatatouilleUITestsLaunchTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RatatouilleUITestsLaunchTests.swift; sourceTree = "<group>"; };
+		314AEDF12B0CF06D00BCFCB5 /* RecipesAPIClient.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RecipesAPIClient.swift; sourceTree = "<group>"; };
 		31FA62292B0511DF00BE8087 /* RecipeListItemView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RecipeListItemView.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -138,6 +140,7 @@
 		3122A0782B0295D40084FD0B /* Ratatouille */ = {
 			isa = PBXGroup;
 			children = (
+				314AEDF12B0CF06D00BCFCB5 /* RecipesAPIClient.swift */,
 				3122A0792B0295D40084FD0B /* RatatouilleApp.swift */,
 				3122A07D2B0295D50084FD0B /* Assets.xcassets */,
 				31049AE82B03C66700688581 /* Models */,
@@ -309,6 +312,7 @@
 				3122A07A2B0295D40084FD0B /* RatatouilleApp.swift in Sources */,
 				31049AF12B03EE2600688581 /* SettingsView.swift in Sources */,
 				31049AF32B04011700688581 /* MyRecipes.swift in Sources */,
+				314AEDF22B0CF06D00BCFCB5 /* RecipesAPIClient.swift in Sources */,
 				31049AED2B03EDFC00688581 /* MyRecipesView.swift in Sources */,
 				31049AE72B03BAF600688581 /* SplashScreenView.swift in Sources */,
 			);

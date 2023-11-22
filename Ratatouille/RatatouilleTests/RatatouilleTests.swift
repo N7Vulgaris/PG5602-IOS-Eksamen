@@ -32,5 +32,31 @@ final class RatatouilleTests: XCTestCase {
             // Put the code you want to measure the time of here.
         }
     }
+    
+    func testValidJSON() throws {
+        let jsonSingle = """
+        {
+        "strMeal" : "Burger",
+        "strMealThumb" : "carrot.fill",
+        "strCategory" : "Dinner",
+        }
+        """
+        let jsonArray = """
+        [{
+        "strMeal" : "Burger",
+        "strMealThumb" : "carrot.fill",
+        "strCategory" : "Dinner",
+        },
+        {"strMeal" : "Fiskekaker",
+        "strMealThumb" : "bile",
+        "strCategory" : "Supper",
+        }
+        ]
+        """
+        let decoder = JSONDecoder()
+
+        let _ = try JSONDecoder().decode(MyRecipes.self, from: jsonSingle.data(using: .utf8)!)
+        let __ = try JSONDecoder().decode([MyRecipes].self, from: jsonArray.data(using: .utf8)!)
+    }
 
 }

@@ -12,9 +12,9 @@ struct RecipeListItemView: View {
 //    var swipeLeft: (() -> ())
 //    var swipeRight: (() -> ())
     
-    init(recipe: Binding<MyRecipes>) {
-        self.recipe = recipe
-    }
+//    init(recipe: Binding<MyRecipes>) {
+//        self.recipe = recipe
+//    }
     
     @State var recipe: Binding<MyRecipes>
 //    @State var isFavorited: Bool = false
@@ -25,23 +25,23 @@ struct RecipeListItemView: View {
                 Circle().fill(.blue.gradient) // TODO: Maybe make function to generate random color
                     .scaledToFit()
                     .frame(width: 60)
-                Image(systemName: recipe.wrappedValue.recipeImage)
+//                Image(systemName: recipe.wrappedValue.recipeImage)
             }
             VStack(alignment: .leading) {
-                Text("\(recipe.wrappedValue.recipeName)")
-                Text("\(recipe.wrappedValue.recipeCategpry)")
+//                Text("\(recipe.wrappedValue.recipeName)")
+//                Text("\(recipe.wrappedValue.recipeCategory)")
                 }
             Spacer()
             
-            if recipe.wrappedValue.recipeIsFavorited == true {
-                Image(systemName: "star.fill")
-                    .padding(.horizontal)
-                    .foregroundStyle(.yellow)
-            } else {
-                Image(systemName: "star.fill")
-                    .padding(.horizontal)
-                    .foregroundStyle(.green)
-            }
+//            if recipe.wrappedValue.recipeIsFavorited == true {
+//                Image(systemName: "star.fill")
+//                    .padding(.horizontal)
+//                    .foregroundStyle(.yellow)
+//            } else {
+//                Image(systemName: "star.fill")
+//                    .padding(.horizontal)
+//                    .foregroundStyle(.green)
+//            }
             
             Image(systemName: "chevron.right")
             
@@ -52,5 +52,5 @@ struct RecipeListItemView: View {
 }
 
 #Preview {
-    RecipeListItemView(recipe: .constant(MyRecipes.init(id: 90, recipeName: "Vaffler", recipeImage: "carrot.fill", recipeCategpry: "Dessert", recipeIsFavorited: true)))
+    RecipeListItemView(recipe: .constant(MyRecipes.demoRecipes))
 }

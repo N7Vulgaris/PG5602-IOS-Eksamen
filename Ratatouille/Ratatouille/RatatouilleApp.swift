@@ -11,8 +11,8 @@ import SwiftUI
 struct RatatouilleApp: App {
     @State var splashCreenSsActive = true
     
-    @State var savedRecipes: [MyRecipes] = MyRecipes.demoRecipes
-    @State var archivedRecipes = [MyRecipes]()
+    @State var savedRecipes: MyRecipes = MyRecipes.demoRecipes
+    @State var archivedRecipes: MyRecipes = MyRecipes.demoArchivedRecipes
     
     var body: some Scene {
         WindowGroup {
