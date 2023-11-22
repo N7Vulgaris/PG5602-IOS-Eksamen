@@ -18,7 +18,7 @@ struct MyRecipesView: View {
     @State var savedRecipes: Binding<MyRecipes>
     @State var archivedRecipes: Binding<MyRecipes>
     
-    func archiveRecipe(recipe: Binding<MyRecipes>) {
+    func archiveRecipe(recipe: Binding<Recipe>) {
         // TODO: ALSO get this shit working:
         var hasRemoved = false
         
@@ -34,7 +34,7 @@ struct MyRecipesView: View {
 //        }
     }
     
-    func favoriteRecipe(recipe: Binding<MyRecipes>) {
+    func favoriteRecipe(recipe: Binding<Recipe>) {
         // TODO: get this shit working -> recipe.recipeIsFavorited = !recipe.recipeIsFavorited
 //        recipe.wrappedValue.recipeIsFavorited = !recipe.wrappedValue.recipeIsFavorited!
 //        print(recipe.wrappedValue.recipeIsFavorited)
@@ -42,44 +42,41 @@ struct MyRecipesView: View {
     
     var body: some View {
         
-        VStack {
-            Text("Hei")
+        if savedRecipes.wrappedValue.recipes.isEmpty {
+            VStack {
+                Image(systemName: "square.stack.3d.up.slash")
+                    .scaleEffect(2.5)
+                    .padding(.bottom)
+                Text("Ingen matoppskrifter")
+                    .font(.system(size: 25))
+            }
+        } else {
+            
+            // TODO: Add NavigationStack and NavigationLinks for RecipeDetailView
+            
+            List {
+                
+                ForEach(savedRecipes.recipes) { recipe in
+                    RecipeListItemView(recipe: recipe)
+                        .swipeActions(edge: .leading, allowsFullSwipe: true) {
+                            Button(action: {
+                                favoriteRecipe(recipe: recipe)
+                            }, label: {
+                                Image(systemName: "star.fill")
+                                    .tint(.yellow)
+                            })
+                        }
+                        .swipeActions(edge: .trailing, allowsFullSwipe: true) {
+                            Button(action: {
+                                archiveRecipe(recipe: recipe)
+                            }, label: {
+                                Image(systemName: "xmark.bin.fill")
+                                    .tint(.blue)
+                            })
+                        }
+                }
+            }
         }
-        
-//        if savedRecipes.isEmpty {
-//            VStack {
-//                Image(systemName: "square.stack.3d.up.slash")
-//                    .scaleEffect(2.5)
-//                    .padding(.bottom)
-//                Text("Ingen matoppskrifter")
-//                    .font(.system(size: 25))
-//            }
-//        } else {
-//            
-//            // TODO: Add NavigationStack and NavigationLinks for RecipeDetailView
-//            
-//            List {
-//                ForEach(savedRecipes) { recipe in
-//                    RecipeListItemView(recipe: recipe)
-//                        .swipeActions(edge: .leading, allowsFullSwipe: true) {
-//                            Button(action: {
-//                                favoriteRecipe(recipe: recipe)
-//                            }, label: {
-//                                Image(systemName: "star.fill")
-//                                    .tint(.yellow)
-//                            })
-//                        }
-//                        .swipeActions(edge: .trailing, allowsFullSwipe: true) {
-//                            Button(action: {
-//                                archiveRecipe(recipe: recipe)
-//                            }, label: {
-//                                Image(systemName: "xmark.bin.fill")
-//                                    .tint(.blue)
-//                            })
-//                        }
-//                }
-//            }
-//        }
     }
     
     

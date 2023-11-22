@@ -16,18 +16,14 @@ struct SearchView: View {
     
     @State var apiClient = RecipesAPIClient.live
     
-    func onAppear(recipeName: String) {
+    func getRecipesFromApi(recipeName: String) {
         Task {
             do {
-//                let searchResult = try await apiClient.getRecipesByName(searchInput)
                 
-                let url=URL(string:"https://www.themealdb.com/api/json/v1/1/search.php?s=\(recipeName)")!
-                
-                let (data, response) = try await URLSession.shared.data(from: url)
-                let recipes = try JSONDecoder().decode(MyRecipes.self, from: data)
+                let searchResult = try await apiClient.getRecipesByName(recipeName)
                 
                 DispatchQueue.main.async {
-                    self.searchResult = recipes
+                    self.searchResult = searchResult
                 }
                 
             } catch let error {
@@ -40,25 +36,43 @@ struct SearchView: View {
         VStack() {
             HStack {
                 Text("Søk")
+                    .fontWeight(.heavy)
+                    .font(.title)
                 Spacer()
             }
             .padding(.horizontal)
             
-            TextField("Søk...", text: $searchInput)
-            Spacer()
-            
-            Button("Søk") {
-                onAppear(recipeName: searchInput)
+            HStack {
+                TextField("Søk...", text: $searchInput)
+                Spacer()
+                
+                Button("Søk") {
+                    getRecipesFromApi(recipeName: searchInput)
+                }
             }
+            .padding(.horizontal)
             
             List {
-//                ForEach(searchResult) { recipe in
-//                    Text("\(recipe.recipeName)")
-//                }
-                
                 ForEach(searchResult.recipes) { recipe in
-                    Text(recipe.recipeName)
+                    SearchListItemView(recipe: recipe)
+                        .swipeActions(edge: .leading, allowsFullSwipe: true) {
+                            Button(action: {
+                                print("leading")
+                            }, label: {
+                                Image(systemName: "star.fill")
+                                    .tint(.yellow)
+                            })
+                        }
+                        .swipeActions(edge: .trailing, allowsFullSwipe: true) {
+                            Button(action: {
+                                print("trailing")
+                            }, label: {
+                                Image(systemName: "xmark.bin.fill")
+                                    .tint(.blue)
+                            })
+                        }
                 }
+                
             }
         }
     }

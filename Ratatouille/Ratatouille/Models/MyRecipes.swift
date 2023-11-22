@@ -9,20 +9,6 @@ import Foundation
 
 struct MyRecipes: Codable {
     
-//    let id: Int
-//    let id: UUID = UUID()
-//    
-//    let recipeName: String
-//    let recipeImage: String
-//    let recipeCategory: String
-//    var recipeIsFavorited: Bool?
-//    
-//    enum CodingKeys: String, CodingKey {
-//        case recipeName = "strMeal"
-//        case recipeImage = "strMealThumb"
-//        case recipeCategory = "strCategory"
-//    }
-    
     var recipes: [Recipe]
     
     enum CodingKeys: String, CodingKey {
@@ -35,7 +21,7 @@ struct Recipe: Identifiable, Codable {
     let id: UUID = UUID()
     
     let recipeName: String
-    let recipeImage: String
+    let recipeImage: URL?
     let recipeCategory: String
     var recipeIsFavorited: Bool?
     
@@ -69,13 +55,28 @@ extension MyRecipes {
 extension MyRecipes {
     
     static var demoRecipes = MyRecipes.init(recipes: [
-        Recipe.init(recipeName: "Lapskaus", recipeImage: "carrot.fill", recipeCategory: "Dinner", recipeIsFavorited: false),
-        Recipe.init(recipeName: "Får i kål", recipeImage: "carrot.fill", recipeCategory: "Dinner", recipeIsFavorited: true),
-        Recipe.init(recipeName: "Burger", recipeImage: "carrot.fill", recipeCategory: "Breakfast", recipeIsFavorited: false)
+        Recipe.init(recipeName: "Lapskaus", 
+                    recipeImage: URL.init(string: "https://www.themealdb.com/images/media/meals/o7p9581608589317.jpg"),
+                    recipeCategory: "Dinner",
+                    recipeIsFavorited: false),
+        Recipe.init(recipeName: "Får i kål", 
+                    recipeImage: URL.init(string: "https://www.themealdb.com/images/media/meals/o7p9581608589317.jpg"),
+                    recipeCategory: "Dinner",
+                    recipeIsFavorited: true),
+        Recipe.init(recipeName: "Burger", 
+                    recipeImage: URL.init(string: "https://www.themealdb.com/images/media/meals/o7p9581608589317.jpg"),
+                    recipeCategory: "Breakfast",
+                    recipeIsFavorited: false)
     ])
     
     static var demoArchivedRecipes = MyRecipes.init(recipes: [
-            Recipe.init(recipeName: "Burger", recipeImage: "carrot.fill", recipeCategory: "Dinner", recipeIsFavorited: true),
-            Recipe.init(recipeName: "Lapskaus", recipeImage: "carrot.fill", recipeCategory: "Dinner", recipeIsFavorited: false)
+            Recipe.init(recipeName: "Burger", 
+                        recipeImage: URL.init(string: "https://www.themealdb.com/images/media/meals/o7p9581608589317.jpg"),
+                        recipeCategory: "Dinner",
+                        recipeIsFavorited: true),
+            Recipe.init(recipeName: "Lapskaus", 
+                        recipeImage: URL.init(string: "https://www.themealdb.com/images/media/meals/o7p9581608589317.jpg"),
+                        recipeCategory: "Dinner",
+                        recipeIsFavorited: false)
         ])
 }

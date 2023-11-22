@@ -16,7 +16,7 @@ struct RecipeListItemView: View {
 //        self.recipe = recipe
 //    }
     
-    @State var recipe: Binding<MyRecipes>
+    @State var recipe: Binding<Recipe>
 //    @State var isFavorited: Bool = false
     
     var body: some View {
@@ -28,20 +28,20 @@ struct RecipeListItemView: View {
 //                Image(systemName: recipe.wrappedValue.recipeImage)
             }
             VStack(alignment: .leading) {
-//                Text("\(recipe.wrappedValue.recipeName)")
-//                Text("\(recipe.wrappedValue.recipeCategory)")
+                Text("\(recipe.wrappedValue.recipeName)")
+                Text("\(recipe.wrappedValue.recipeCategory)")
                 }
             Spacer()
             
-//            if recipe.wrappedValue.recipeIsFavorited == true {
-//                Image(systemName: "star.fill")
-//                    .padding(.horizontal)
-//                    .foregroundStyle(.yellow)
-//            } else {
-//                Image(systemName: "star.fill")
-//                    .padding(.horizontal)
-//                    .foregroundStyle(.green)
-//            }
+            if recipe.wrappedValue.recipeIsFavorited == true {
+                Image(systemName: "star.fill")
+                    .padding(.horizontal)
+                    .foregroundStyle(.yellow)
+            } else {
+                Image(systemName: "star.fill")
+                    .padding(.horizontal)
+                    .foregroundStyle(.green)
+            }
             
             Image(systemName: "chevron.right")
             
@@ -52,5 +52,5 @@ struct RecipeListItemView: View {
 }
 
 #Preview {
-    RecipeListItemView(recipe: .constant(MyRecipes.demoRecipes))
+    RecipeListItemView(recipe: .constant(Recipe.init(recipeName: "Pizza", recipeImage: URL.init(string: "https://www.themealdb.com/images/media/meals/o7p9581608589317.jpg"), recipeCategory: "Dinner", recipeIsFavorited: true)))
 }
