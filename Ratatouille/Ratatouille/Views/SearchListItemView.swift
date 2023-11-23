@@ -9,7 +9,16 @@ import SwiftUI
 
 struct SearchListItemView: View {
     
-    @State var recipe: Recipe
+    init(recipe: Binding<Recipe>) {
+        self.recipe = recipe
+//        self.swipedLeft = swipedLeft
+//        self.swipedRight = swipedRight
+    }
+    
+    var recipe: Binding<Recipe>
+    
+//    var swipedLeft: (() -> Void)
+//    var swipedRight: (() -> Void)
     
     var body: some View {
         
@@ -20,7 +29,7 @@ struct SearchListItemView: View {
 //                .scaledToFit()
 //                .frame(width: 60)
             
-            AsyncImage(url: recipe.recipeImage, scale: 20) { image in
+            AsyncImage(url: recipe.wrappedValue.recipeImage, scale: 20) { image in
                 image
                     .resizable()
                     .aspectRatio(contentMode: .fit)
@@ -32,12 +41,12 @@ struct SearchListItemView: View {
 
             
             VStack(alignment: .leading) {
-                Text("\(recipe.recipeName)")
-                Text("\(recipe.recipeCategory)")
+                Text("\(recipe.wrappedValue.recipeName)")
+                Text("\(recipe.wrappedValue.recipeCategory)")
                 }
             Spacer()
             
-            if recipe.recipeIsFavorited == true {
+            if recipe.wrappedValue.recipeIsFavorited == true {
                 Image(systemName: "star.fill")
                     .padding(.horizontal)
                     .foregroundStyle(.yellow)
@@ -55,5 +64,5 @@ struct SearchListItemView: View {
 }
 
 #Preview {
-    SearchListItemView(recipe: Recipe.init(recipeName: "Tacos", recipeImage: URL.init(string: "https://www.themealdb.com/images/media/meals/o7p9581608589317.jpg"), recipeCategory: "Dinner", recipeIsFavorited: true))
+    SearchListItemView(recipe: .constant(Recipe(recipeName: "Tacos", recipeImage: URL.init(string: "https://www.themealdb.com/images/media/meals/o7p9581608589317.jpg"), recipeCategory: "Dinner", recipeIsFavorited: true)))
 }

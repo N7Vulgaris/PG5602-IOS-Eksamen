@@ -9,12 +9,17 @@ import SwiftUI
 
 struct SearchView: View {
     
+    init(savedRecipes: Binding<[Recipe]> ) {
+        self.savedRecipes = savedRecipes
+    }
+    
     @State var searchInput: String = ""
     @State var searchWindowIsPresented: Bool = false
-    
-    @State var searchResult: MyRecipes = MyRecipes.init(recipes: [])
+    @State var searchResult: MyRecipes = MyRecipes.init(recipes: [Recipe]())
     
     @State var apiClient = RecipesAPIClient.live
+    
+    var savedRecipes: Binding<[Recipe]>
     
     func getRecipesFromApi(recipeName: String) {
         Task {
@@ -32,8 +37,12 @@ struct SearchView: View {
         }
     }
     
+    func saveRecipe(recipe: Binding<Recipe>) {
+        savedRecipes.wrappedValue.append(recipe.wrappedValue)
+    }
+    
     var body: some View {
-        VStack() {
+        VStack {
             HStack {
                 Text("Søk")
                     .fontWeight(.heavy)
@@ -53,7 +62,7 @@ struct SearchView: View {
             .padding(.horizontal)
             
             List {
-                ForEach(searchResult.recipes) { recipe in
+                ForEach($searchResult.recipes) { recipe in
                     SearchListItemView(recipe: recipe)
                         .swipeActions(edge: .leading, allowsFullSwipe: true) {
                             Button(action: {
@@ -65,9 +74,11 @@ struct SearchView: View {
                         }
                         .swipeActions(edge: .trailing, allowsFullSwipe: true) {
                             Button(action: {
+                                saveRecipe(recipe: recipe)
                                 print("trailing")
+                                print(savedRecipes.wrappedValue)
                             }, label: {
-                                Image(systemName: "xmark.bin.fill")
+                                Image(systemName: "square.grid.3x1.folder.fill.badge.plus")
                                     .tint(.blue)
                             })
                         }
@@ -75,9 +86,13 @@ struct SearchView: View {
                 
             }
         }
+        .onAppear {
+            print(savedRecipes)
+            print("--------------------------------------------------------------------")
+        }
     }
 }
 
 #Preview {
-    SearchView(searchResult: MyRecipes.demoRecipes)
+    SearchView(savedRecipes: .constant( [Recipe]() ))
 }

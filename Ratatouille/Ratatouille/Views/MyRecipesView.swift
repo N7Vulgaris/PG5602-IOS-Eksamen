@@ -9,14 +9,14 @@ import SwiftUI
 
 struct MyRecipesView: View {
     
-    init(savedRecipes: Binding<MyRecipes>, archivedRecipes: Binding<MyRecipes>) {
+    init(savedRecipes: Binding<[Recipe]>, archivedRecipes: Binding<MyRecipes>) {
         self.savedRecipes = savedRecipes
         self.archivedRecipes = archivedRecipes
     }
     
     // TODO: Figure out if I use @State or @Binding
-    @State var savedRecipes: Binding<MyRecipes>
-    @State var archivedRecipes: Binding<MyRecipes>
+    var savedRecipes: Binding<[Recipe]>
+    var archivedRecipes: Binding<MyRecipes>
     
     func archiveRecipe(recipe: Binding<Recipe>) {
         // TODO: ALSO get this shit working:
@@ -42,7 +42,7 @@ struct MyRecipesView: View {
     
     var body: some View {
         
-        if savedRecipes.wrappedValue.recipes.isEmpty {
+        if savedRecipes.wrappedValue.isEmpty {
             VStack {
                 Image(systemName: "square.stack.3d.up.slash")
                     .scaleEffect(2.5)
@@ -56,7 +56,7 @@ struct MyRecipesView: View {
             
             List {
                 
-                ForEach(savedRecipes.recipes) { recipe in
+                ForEach(savedRecipes) { recipe in
                     RecipeListItemView(recipe: recipe)
                         .swipeActions(edge: .leading, allowsFullSwipe: true) {
                             Button(action: {
@@ -83,5 +83,5 @@ struct MyRecipesView: View {
 }
 
 #Preview {
-    MyRecipesView(savedRecipes: .constant(MyRecipes.demoRecipes), archivedRecipes: .constant(MyRecipes.demoRecipes))
+    MyRecipesView(savedRecipes: .constant([Recipe]()), archivedRecipes: .constant(MyRecipes.demoRecipes))
 }

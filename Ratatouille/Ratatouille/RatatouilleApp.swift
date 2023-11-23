@@ -11,7 +11,8 @@ import SwiftUI
 struct RatatouilleApp: App {
     @State var splashCreenSsActive = true
     
-    @State var savedRecipes: MyRecipes = MyRecipes.demoRecipes
+//    @State var savedRecipes: MyRecipes = MyRecipes(recipes: [Recipe]())
+    @State var savedRecipes = [Recipe]()
     @State var archivedRecipes: MyRecipes = MyRecipes.demoArchivedRecipes
     
     var body: some Scene {
@@ -28,7 +29,7 @@ struct RatatouilleApp: App {
                             Label("Mine oppskrifter", systemImage: "fork.knife.circle")
                         }
                     
-                    SearchView()
+                    SearchView(savedRecipes: $savedRecipes)
                         .tabItem {
                             Label("Søk", systemImage: "magnifyingglass.circle")
                         }

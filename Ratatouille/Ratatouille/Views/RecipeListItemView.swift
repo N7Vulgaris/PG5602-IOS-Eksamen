@@ -16,17 +16,21 @@ struct RecipeListItemView: View {
 //        self.recipe = recipe
 //    }
     
-    @State var recipe: Binding<Recipe>
+    var recipe: Binding<Recipe>
 //    @State var isFavorited: Bool = false
     
     var body: some View {
         HStack {
-            ZStack {
-                Circle().fill(.blue.gradient) // TODO: Maybe make function to generate random color
-                    .scaledToFit()
-                    .frame(width: 60)
-//                Image(systemName: recipe.wrappedValue.recipeImage)
+            AsyncImage(url: recipe.wrappedValue.recipeImage, scale: 20) { image in
+                image
+                    .resizable()
+                    .aspectRatio(contentMode: .fit)
+            } placeholder: {
+                Color.gray
             }
+            .frame(width: 60)
+            .mask(Circle())
+            
             VStack(alignment: .leading) {
                 Text("\(recipe.wrappedValue.recipeName)")
                 Text("\(recipe.wrappedValue.recipeCategory)")

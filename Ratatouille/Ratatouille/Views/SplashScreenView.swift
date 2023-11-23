@@ -10,7 +10,7 @@ import SwiftUI
 struct SplashScreenView: View {
     @State private var size = 0.8
     @State private var opacity = 0.5
-    @State var isActive: Binding<Bool>
+    var isActive: Binding<Bool>
     
     init(isActive: Binding<Bool>) {
         self.isActive = isActive
