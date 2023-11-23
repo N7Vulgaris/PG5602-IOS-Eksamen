@@ -12,8 +12,11 @@ struct RecipeInstructionsView: View {
     var recipeInstructions: String
     
     var body: some View {
-        VStack {
-            Text("\(recipeInstructions)")
+        ScrollView(.vertical) {
+            // TODO: Make the scrolling actually work
+            VStack {
+                Text("\(recipeInstructions)")
+            }
         }
     }
 }

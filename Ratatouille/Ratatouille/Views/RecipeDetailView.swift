@@ -18,7 +18,6 @@ struct RecipeDetailView: View {
     var body: some View {
         NavigationStack {
             VStack(alignment: .leading) {
-                
                 AsyncImage(url: recipe.wrappedValue.recipeImage) { image in
                     image
                         .resizable()
@@ -32,10 +31,9 @@ struct RecipeDetailView: View {
                 .padding(.horizontal)
                 
                 VStack(alignment: .leading) {
-                    Text("Name: \(recipe.wrappedValue.recipeName)")
-                    Text("Category: \(recipe.wrappedValue.recipeCategory)")
-                    Text("Tags: \(recipe.wrappedValue.recipeTags)")
-                    Text("Area: \(recipe.wrappedValue.recipeArea)")
+                    Text("Navn: \(recipe.wrappedValue.recipeName)")
+                    Text("Kategori: \(recipe.wrappedValue.recipeCategory)")
+                    Text("Landområde: \(recipe.wrappedValue.recipeArea)")
                 }
                 .padding(.leading, 40)
                 .padding(.top, 10)
@@ -56,7 +54,7 @@ struct RecipeDetailView: View {
                                     .fontWeight(.medium)
                             }
                         } label: {
-                            Text("Instructions")
+                            Text("Instruksjoner")
                         }
                         .padding(.trailing, 40)
                         

@@ -80,6 +80,7 @@ struct MyRecipesView: View {
                         }
                     }
                 }
+                .navigationTitle("Matoppskrifter")
             }
         }
     }

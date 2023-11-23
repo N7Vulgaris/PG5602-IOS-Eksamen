@@ -64,9 +64,45 @@ struct SearchView: View {
                         print("3")
                     }
                 } label: {
-                    Image(systemName: "carrot.fill")
+                    Image(systemName: "globe")
+                        .resizable()
+                        .modifier(DropdownIconStyle())
+                    // TODO: Maybe change these to a custom view modifier?
                 }
+                Menu {
+                    Button("4") {
+                        print("4")
+                    }
+                    Button("5") {
+                        print("5")
+                    }
+                    Button("6") {
+                        print("6")
+                    }
+                } label: {
+                    Image(systemName: "rectangle.3.group.bubble")
+                        .resizable()
+                        .modifier(DropdownIconStyle())
+                }
+                Menu {
+                    Button("7") {
+                        print("7")
+                    }
+                    Button("8") {
+                        print("8")
+                    }
+                    Button("9") {
+                        print("9")
+                    }
+                } label: {
+                    Image(systemName: "carrot.fill")
+                        .resizable()
+                        .modifier(DropdownIconStyle())
+                }
+                
+                
             }
+            
             
             
             HStack {
@@ -103,10 +139,6 @@ struct SearchView: View {
                 }
                 
             }
-        }
-        .onAppear {
-            print(savedRecipes)
-            print("--------------------------------------------------------------------")
         }
     }
 }
