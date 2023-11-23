@@ -12,8 +12,9 @@ struct RatatouilleApp: App {
     @State var splashCreenSsActive = true
     
 //    @State var savedRecipes: MyRecipes = MyRecipes(recipes: [Recipe]())
-    @State var savedRecipes = [Recipe]()
-    @State var archivedRecipes: MyRecipes = MyRecipes.demoArchivedRecipes
+//    @State var savedRecipes = [Recipe]()
+    @State var savedRecipes = MyRecipes.demoRecipes
+    @State var archivedRecipes = [Recipe]()
     
     var body: some Scene {
         WindowGroup {

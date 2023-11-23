@@ -9,14 +9,14 @@ import SwiftUI
 
 struct MyRecipesView: View {
     
-    init(savedRecipes: Binding<[Recipe]>, archivedRecipes: Binding<MyRecipes>) {
+    init(savedRecipes: Binding<[Recipe]>, archivedRecipes: Binding<[Recipe]>) {
         self.savedRecipes = savedRecipes
         self.archivedRecipes = archivedRecipes
     }
     
     // TODO: Figure out if I use @State or @Binding
     var savedRecipes: Binding<[Recipe]>
-    var archivedRecipes: Binding<MyRecipes>
+    var archivedRecipes: Binding<[Recipe]>
     
     func archiveRecipe(recipe: Binding<Recipe>) {
         // TODO: ALSO get this shit working:
@@ -36,8 +36,8 @@ struct MyRecipesView: View {
     
     func favoriteRecipe(recipe: Binding<Recipe>) {
         // TODO: get this shit working -> recipe.recipeIsFavorited = !recipe.recipeIsFavorited
-//        recipe.wrappedValue.recipeIsFavorited = !recipe.wrappedValue.recipeIsFavorited!
-//        print(recipe.wrappedValue.recipeIsFavorited)
+        recipe.wrappedValue.recipeIsFavorited = !recipe.wrappedValue.recipeIsFavorited
+        
     }
     
     var body: some View {
@@ -54,26 +54,31 @@ struct MyRecipesView: View {
             
             // TODO: Add NavigationStack and NavigationLinks for RecipeDetailView
             
-            List {
-                
-                ForEach(savedRecipes) { recipe in
-                    RecipeListItemView(recipe: recipe)
-                        .swipeActions(edge: .leading, allowsFullSwipe: true) {
-                            Button(action: {
-                                favoriteRecipe(recipe: recipe)
-                            }, label: {
-                                Image(systemName: "star.fill")
-                                    .tint(.yellow)
-                            })
+            NavigationStack {
+                List {
+                    ForEach(savedRecipes) { recipe in
+                        NavigationLink {
+                            RecipeDetailView(recipe: recipe)
+                        } label: {
+                            RecipeListItemView(recipe: recipe)
+                                .swipeActions(edge: .leading, allowsFullSwipe: true) {
+                                    Button(action: {
+                                        favoriteRecipe(recipe: recipe)
+                                    }, label: {
+                                        Image(systemName: "star.fill")
+                                            .tint(.yellow)
+                                    })
+                                }
+                                .swipeActions(edge: .trailing, allowsFullSwipe: true) {
+                                    Button(action: {
+                                        archiveRecipe(recipe: recipe)
+                                    }, label: {
+                                        Image(systemName: "xmark.bin.fill")
+                                            .tint(.blue)
+                                    })
+                                }
                         }
-                        .swipeActions(edge: .trailing, allowsFullSwipe: true) {
-                            Button(action: {
-                                archiveRecipe(recipe: recipe)
-                            }, label: {
-                                Image(systemName: "xmark.bin.fill")
-                                    .tint(.blue)
-                            })
-                        }
+                    }
                 }
             }
         }
@@ -83,5 +88,5 @@ struct MyRecipesView: View {
 }
 
 #Preview {
-    MyRecipesView(savedRecipes: .constant([Recipe]()), archivedRecipes: .constant(MyRecipes.demoRecipes))
+    MyRecipesView(savedRecipes: .constant(MyRecipes.demoRecipes), archivedRecipes: .constant(MyRecipes.demoRecipes))
 }

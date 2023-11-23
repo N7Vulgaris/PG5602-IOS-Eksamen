@@ -19,6 +19,8 @@
 		3122A0952B0295D50084FD0B /* RatatouilleUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3122A0942B0295D50084FD0B /* RatatouilleUITests.swift */; };
 		3122A0972B0295D50084FD0B /* RatatouilleUITestsLaunchTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3122A0962B0295D50084FD0B /* RatatouilleUITestsLaunchTests.swift */; };
 		314AEDF22B0CF06D00BCFCB5 /* RecipesAPIClient.swift in Sources */ = {isa = PBXBuildFile; fileRef = 314AEDF12B0CF06D00BCFCB5 /* RecipesAPIClient.swift */; };
+		31591A072B0FC596005A4D10 /* RecipeDetailView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 31591A062B0FC596005A4D10 /* RecipeDetailView.swift */; };
+		31591A092B0FDE00005A4D10 /* RecipeInstructionsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 31591A082B0FDE00005A4D10 /* RecipeInstructionsView.swift */; };
 		31EE5AC62B0E871000B95070 /* SearchListItemView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 31EE5AC52B0E871000B95070 /* SearchListItemView.swift */; };
 		31FA622A2B0511DF00BE8087 /* RecipeListItemView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 31FA62292B0511DF00BE8087 /* RecipeListItemView.swift */; };
 /* End PBXBuildFile section */
@@ -56,6 +58,8 @@
 		3122A0942B0295D50084FD0B /* RatatouilleUITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RatatouilleUITests.swift; sourceTree = "<group>"; };
 		3122A0962B0295D50084FD0B /* RatatouilleUITestsLaunchTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RatatouilleUITestsLaunchTests.swift; sourceTree = "<group>"; };
 		314AEDF12B0CF06D00BCFCB5 /* RecipesAPIClient.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RecipesAPIClient.swift; sourceTree = "<group>"; };
+		31591A062B0FC596005A4D10 /* RecipeDetailView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RecipeDetailView.swift; sourceTree = "<group>"; };
+		31591A082B0FDE00005A4D10 /* RecipeInstructionsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RecipeInstructionsView.swift; sourceTree = "<group>"; };
 		31EE5AC52B0E871000B95070 /* SearchListItemView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchListItemView.swift; sourceTree = "<group>"; };
 		31FA62292B0511DF00BE8087 /* RecipeListItemView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RecipeListItemView.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -110,12 +114,14 @@
 		31049AEB2B03C68700688581 /* Views */ = {
 			isa = PBXGroup;
 			children = (
-				31049AE62B03BAF600688581 /* SplashScreenView.swift */,
 				31049AEC2B03EDFC00688581 /* MyRecipesView.swift */,
-				31049AEE2B03EE1700688581 /* SearchView.swift */,
-				31049AF02B03EE2600688581 /* SettingsView.swift */,
+				31591A062B0FC596005A4D10 /* RecipeDetailView.swift */,
 				31FA62292B0511DF00BE8087 /* RecipeListItemView.swift */,
 				31EE5AC52B0E871000B95070 /* SearchListItemView.swift */,
+				31049AEE2B03EE1700688581 /* SearchView.swift */,
+				31049AF02B03EE2600688581 /* SettingsView.swift */,
+				31049AE62B03BAF600688581 /* SplashScreenView.swift */,
+				31591A082B0FDE00005A4D10 /* RecipeInstructionsView.swift */,
 			);
 			path = Views;
 			sourceTree = "<group>";
@@ -143,8 +149,8 @@
 		3122A0782B0295D40084FD0B /* Ratatouille */ = {
 			isa = PBXGroup;
 			children = (
-				314AEDF12B0CF06D00BCFCB5 /* RecipesAPIClient.swift */,
 				3122A0792B0295D40084FD0B /* RatatouilleApp.swift */,
+				314AEDF12B0CF06D00BCFCB5 /* RecipesAPIClient.swift */,
 				3122A07D2B0295D50084FD0B /* Assets.xcassets */,
 				31049AE82B03C66700688581 /* Models */,
 				3122A07F2B0295D50084FD0B /* Preview Content */,
@@ -311,6 +317,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				31049AEF2B03EE1700688581 /* SearchView.swift in Sources */,
+				31591A072B0FC596005A4D10 /* RecipeDetailView.swift in Sources */,
 				31EE5AC62B0E871000B95070 /* SearchListItemView.swift in Sources */,
 				31FA622A2B0511DF00BE8087 /* RecipeListItemView.swift in Sources */,
 				3122A07A2B0295D40084FD0B /* RatatouilleApp.swift in Sources */,
@@ -319,6 +326,7 @@
 				314AEDF22B0CF06D00BCFCB5 /* RecipesAPIClient.swift in Sources */,
 				31049AED2B03EDFC00688581 /* MyRecipesView.swift in Sources */,
 				31049AE72B03BAF600688581 /* SplashScreenView.swift in Sources */,
+				31591A092B0FDE00005A4D10 /* RecipeInstructionsView.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

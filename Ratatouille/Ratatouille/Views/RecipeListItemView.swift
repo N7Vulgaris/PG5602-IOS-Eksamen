@@ -21,7 +21,7 @@ struct RecipeListItemView: View {
     
     var body: some View {
         HStack {
-            AsyncImage(url: recipe.wrappedValue.recipeImage, scale: 20) { image in
+            AsyncImage(url: recipe.wrappedValue.recipeImage) { image in
                 image
                     .resizable()
                     .aspectRatio(contentMode: .fit)
@@ -35,19 +35,16 @@ struct RecipeListItemView: View {
                 Text("\(recipe.wrappedValue.recipeName)")
                 Text("\(recipe.wrappedValue.recipeCategory)")
                 }
+                .frame(maxWidth: 100, maxHeight: 100)
             Spacer()
             
             if recipe.wrappedValue.recipeIsFavorited == true {
                 Image(systemName: "star.fill")
                     .padding(.horizontal)
                     .foregroundStyle(.yellow)
-            } else {
-                Image(systemName: "star.fill")
-                    .padding(.horizontal)
-                    .foregroundStyle(.green)
             }
             
-            Image(systemName: "chevron.right")
+//            Image(systemName: "chevron.right")
             
         }
         .padding(.vertical)
@@ -56,5 +53,5 @@ struct RecipeListItemView: View {
 }
 
 #Preview {
-    RecipeListItemView(recipe: .constant(Recipe.init(recipeName: "Pizza", recipeImage: URL.init(string: "https://www.themealdb.com/images/media/meals/o7p9581608589317.jpg"), recipeCategory: "Dinner", recipeIsFavorited: true)))
+    RecipeListItemView(recipe: .constant(MyRecipes.demoRecipe))
 }

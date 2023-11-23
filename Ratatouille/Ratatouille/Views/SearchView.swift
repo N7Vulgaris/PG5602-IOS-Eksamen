@@ -51,6 +51,24 @@ struct SearchView: View {
             }
             .padding(.horizontal)
             
+            
+            HStack {
+                Menu {
+                    Button("1") {
+                        print("1")
+                    }
+                    Button("2") {
+                        print("2")
+                    }
+                    Button("3") {
+                        print("3")
+                    }
+                } label: {
+                    Image(systemName: "carrot.fill")
+                }
+            }
+            
+            
             HStack {
                 TextField("Søk...", text: $searchInput)
                 Spacer()
@@ -64,14 +82,14 @@ struct SearchView: View {
             List {
                 ForEach($searchResult.recipes) { recipe in
                     SearchListItemView(recipe: recipe)
-                        .swipeActions(edge: .leading, allowsFullSwipe: true) {
-                            Button(action: {
-                                print("leading")
-                            }, label: {
-                                Image(systemName: "star.fill")
-                                    .tint(.yellow)
-                            })
-                        }
+                    //                        .swipeActions(edge: .leading, allowsFullSwipe: true) {
+                    //                            Button(action: {
+                    //                                print("leading")
+                    //                            }, label: {
+                    //                                Image(systemName: "star.fill")
+                    //                                    .tint(.yellow)
+                    //                            })
+                    //                        }
                         .swipeActions(edge: .trailing, allowsFullSwipe: true) {
                             Button(action: {
                                 saveRecipe(recipe: recipe)

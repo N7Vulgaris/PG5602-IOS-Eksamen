@@ -46,15 +46,11 @@ struct SearchListItemView: View {
                 }
             Spacer()
             
-            if recipe.wrappedValue.recipeIsFavorited == true {
-                Image(systemName: "star.fill")
-                    .padding(.horizontal)
-                    .foregroundStyle(.yellow)
-            } else {
-                Image(systemName: "star.fill")
-                    .padding(.horizontal)
-                    .foregroundStyle(.green)
-            }
+//            if recipe.wrappedValue.recipeIsFavorited == true {
+//                Image(systemName: "star.fill")
+//                    .padding(.horizontal)
+//                    .foregroundStyle(.yellow)
+//            }
             
             Image(systemName: "chevron.right")
             
@@ -64,5 +60,5 @@ struct SearchListItemView: View {
 }
 
 #Preview {
-    SearchListItemView(recipe: .constant(Recipe(recipeName: "Tacos", recipeImage: URL.init(string: "https://www.themealdb.com/images/media/meals/o7p9581608589317.jpg"), recipeCategory: "Dinner", recipeIsFavorited: true)))
+    SearchListItemView(recipe: .constant(MyRecipes.demoRecipe))
 }
