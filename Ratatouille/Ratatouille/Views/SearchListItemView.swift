@@ -11,24 +11,13 @@ struct SearchListItemView: View {
     
     init(recipe: Binding<Recipe>) {
         self.recipe = recipe
-//        self.swipedLeft = swipedLeft
-//        self.swipedRight = swipedRight
     }
     
     var recipe: Binding<Recipe>
     
-//    var swipedLeft: (() -> Void)
-//    var swipedRight: (() -> Void)
-    
     var body: some View {
         
         HStack {
-//                Image(systemName: recipe.wrappedValue.recipeImage)
-//            AsyncImage(url: recipe.wrappedValue.recipeImage)
-//                .mask(Circle())
-//                .scaledToFit()
-//                .frame(width: 60)
-            
             AsyncImage(url: recipe.wrappedValue.recipeImage, scale: 20) { image in
                 image
                     .resizable()
@@ -51,8 +40,6 @@ struct SearchListItemView: View {
 //                    .padding(.horizontal)
 //                    .foregroundStyle(.yellow)
 //            }
-            
-            Image(systemName: "chevron.right")
             
         }
         .padding(.vertical)

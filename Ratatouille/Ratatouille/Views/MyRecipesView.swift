@@ -58,7 +58,7 @@ struct MyRecipesView: View {
                 List {
                     ForEach(savedRecipes) { recipe in
                         NavigationLink {
-                            RecipeDetailView(recipe: recipe)
+//                            RecipeDetailView(recipe: recipe)
                         } label: {
                             RecipeListItemView(recipe: recipe)
                                 .swipeActions(edge: .leading, allowsFullSwipe: true) {

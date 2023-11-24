@@ -42,100 +42,94 @@ struct SearchView: View {
     }
     
     var body: some View {
-        VStack {
-            HStack {
-                Text("Søk")
-                    .fontWeight(.heavy)
-                    .font(.title)
-                Spacer()
-            }
-            .padding(.horizontal)
-            
-            
-            HStack {
-                Menu {
-                    Button("1") {
-                        print("1")
-                    }
-                    Button("2") {
-                        print("2")
-                    }
-                    Button("3") {
-                        print("3")
-                    }
-                } label: {
-                    Image(systemName: "globe")
-                        .resizable()
-                        .modifier(DropdownIconStyle())
-                    // TODO: Maybe change these to a custom view modifier?
+        NavigationStack {
+            VStack {
+                HStack {
+                    Text("Søk")
+                        .fontWeight(.heavy)
+                        .font(.title)
+                    Spacer()
                 }
-                Menu {
-                    Button("4") {
-                        print("4")
-                    }
-                    Button("5") {
-                        print("5")
-                    }
-                    Button("6") {
-                        print("6")
-                    }
-                } label: {
-                    Image(systemName: "rectangle.3.group.bubble")
-                        .resizable()
-                        .modifier(DropdownIconStyle())
-                }
-                Menu {
-                    Button("7") {
-                        print("7")
-                    }
-                    Button("8") {
-                        print("8")
-                    }
-                    Button("9") {
-                        print("9")
-                    }
-                } label: {
-                    Image(systemName: "carrot.fill")
-                        .resizable()
-                        .modifier(DropdownIconStyle())
-                }
+                .padding(.horizontal)
                 
-                
-            }
-            
-            
-            
-            HStack {
-                TextField("Søk...", text: $searchInput)
-                Spacer()
-                
-                Button("Søk") {
-                    getRecipesFromApi(recipeName: searchInput)
-                }
-            }
-            .padding(.horizontal)
-            
-            List {
-                ForEach($searchResult.recipes) { recipe in
-                    SearchListItemView(recipe: recipe)
-                    //                        .swipeActions(edge: .leading, allowsFullSwipe: true) {
-                    //                            Button(action: {
-                    //                                print("leading")
-                    //                            }, label: {
-                    //                                Image(systemName: "star.fill")
-                    //                                    .tint(.yellow)
-                    //                            })
-                    //                        }
-                        .swipeActions(edge: .trailing, allowsFullSwipe: true) {
-                            Button(action: {
-                                saveRecipe(recipe: recipe)
-                                print("trailing")
-                                print(savedRecipes.wrappedValue)
-                            }, label: {
-                                Image(systemName: "square.grid.3x1.folder.fill.badge.plus")
-                                    .tint(.blue)
-                            })
+                HStack {
+                    Menu {
+                        Button("1") {
+                            print("1")
                         }
+                        Button("2") {
+                            print("2")
+                        }
+                        Button("3") {
+                            print("3")
+                        }
+                    } label: {
+                        Image(systemName: "globe")
+                            .resizable()
+                            .modifier(DropdownIconStyle())
+                    }
+                    Menu {
+                        Button("4") {
+                            print("4")
+                        }
+                        Button("5") {
+                            print("5")
+                        }
+                        Button("6") {
+                            print("6")
+                        }
+                    } label: {
+                        Image(systemName: "rectangle.3.group.bubble")
+                            .resizable()
+                            .modifier(DropdownIconStyle())
+                    }
+                    Menu {
+                        Button("7") {
+                            print("7")
+                        }
+                        Button("8") {
+                            print("8")
+                        }
+                        Button("9") {
+                            print("9")
+                        }
+                    } label: {
+                        Image(systemName: "carrot.fill")
+                            .resizable()
+                            .modifier(DropdownIconStyle())
+                    }
+                }
+                
+                HStack {
+                    TextField("Søk...", text: $searchInput)
+                    Spacer()
+                    
+                    Button("Søk") {
+                        getRecipesFromApi(recipeName: searchInput)
+                    }
+                }
+                .padding(.horizontal)
+                
+                
+                List {
+                    ForEach($searchResult.recipes) { recipe in
+                        NavigationLink {
+                            RecipeDetailView(recipe: recipe)
+                        } label: {
+                            SearchListItemView(recipe: recipe)
+                                .swipeActions(edge: .trailing, allowsFullSwipe: true) {
+                                    Button(action: {
+                                        saveRecipe(recipe: recipe)
+                                        print("trailing")
+                                        print(savedRecipes.wrappedValue)
+                                    }, label: {
+                                        Image(systemName: "square.grid.3x1.folder.fill.badge.plus")
+                                            .tint(.blue)
+                                    })
+                                }
+                        }
+                    }
+                    
                 }
                 
             }
