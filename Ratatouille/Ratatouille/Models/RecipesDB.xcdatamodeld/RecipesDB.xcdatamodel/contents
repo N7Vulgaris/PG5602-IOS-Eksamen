@@ -1,7 +1,22 @@
 <?xml version="1.0" encoding="UTF-8" standalone="yes"?>
 <model type="com.apple.IDECoreDataModeler.DataModel" documentVersion="1.0" lastSavedToolsVersion="22222" systemVersion="23A344" minimumToolsVersion="Automatic" sourceLanguage="Swift" usedWithSwiftData="YES" userDefinedModelVersionIdentifier="">
-    <entity name="Area" representedClassName="Area" syncable="YES" codeGenerationType="class"/>
-    <entity name="Category" representedClassName="Category" syncable="YES" codeGenerationType="class"/>
-    <entity name="Ingredient" representedClassName="Ingredient" syncable="YES" codeGenerationType="class"/>
-    <entity name="Meal" representedClassName="Meal" syncable="YES" codeGenerationType="class"/>
+    <entity name="Area" representedClassName="Area" syncable="YES" codeGenerationType="class">
+        <attribute name="name" optional="YES" attributeType="String"/>
+        <relationship name="meal" optional="YES" toMany="YES" deletionRule="Nullify" destinationEntity="Meal" inverseName="area" inverseEntity="Meal"/>
+    </entity>
+    <entity name="Category" representedClassName="Category" syncable="YES" codeGenerationType="class">
+        <attribute name="name" optional="YES" attributeType="String"/>
+        <relationship name="meal" optional="YES" toMany="YES" deletionRule="Nullify" destinationEntity="Meal" inverseName="caregory" inverseEntity="Meal"/>
+    </entity>
+    <entity name="Ingredient" representedClassName="Ingredient" syncable="YES" codeGenerationType="class">
+        <attribute name="name" optional="YES" attributeType="String"/>
+        <relationship name="meal" optional="YES" toMany="YES" deletionRule="Nullify" destinationEntity="Meal" inverseName="ingredient" inverseEntity="Meal"/>
+    </entity>
+    <entity name="Meal" representedClassName="Meal" syncable="YES" codeGenerationType="class">
+        <attribute name="imageUrl" optional="YES" attributeType="String"/>
+        <attribute name="name" optional="YES" attributeType="String"/>
+        <relationship name="area" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="Area" inverseName="meal" inverseEntity="Area"/>
+        <relationship name="caregory" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="Category" inverseName="meal" inverseEntity="Category"/>
+        <relationship name="ingredient" optional="YES" toMany="YES" deletionRule="Nullify" destinationEntity="Ingredient" inverseName="meal" inverseEntity="Ingredient"/>
+    </entity>
 </model>

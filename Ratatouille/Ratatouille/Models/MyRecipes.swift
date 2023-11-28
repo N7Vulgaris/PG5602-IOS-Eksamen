@@ -22,12 +22,12 @@ struct Recipe: Identifiable, Codable {
     
     let recipeName: String
     let recipeImage: URL?
-    let recipeCategory: String
-    let recipeArea: String
+    let recipeCategory: String?
+    let recipeArea: String?
     let recipeInstructions: String
-    let recipeIngredient1: String
-    let recipeIngredient2: String
-    let recipeIngredient3: String
+    let recipeIngredient1: String?
+    let recipeIngredient2: String?
+    let recipeIngredient3: String?
 //    let recipeIngredients: [String]
     
     var recipeIsFavorited: Bool = false

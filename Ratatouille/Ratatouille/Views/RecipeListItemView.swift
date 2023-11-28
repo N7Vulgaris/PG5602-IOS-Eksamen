@@ -33,7 +33,7 @@ struct RecipeListItemView: View {
             
             VStack(alignment: .leading) {
                 Text("\(recipe.wrappedValue.recipeName)")
-                Text("\(recipe.wrappedValue.recipeCategory)")
+                Text("\(recipe.wrappedValue.recipeCategory!)")
                 }
                 .frame(maxWidth: 100, maxHeight: 100)
             Spacer()

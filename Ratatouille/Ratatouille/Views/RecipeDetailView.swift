@@ -32,12 +32,12 @@ struct RecipeDetailView: View {
                 
                 VStack(alignment: .leading) {
                     Text("Navn: \(recipe.wrappedValue.recipeName)")
-                    Text("Kategori: \(recipe.wrappedValue.recipeCategory)")
-                    Text("Landområde: \(recipe.wrappedValue.recipeArea)")
+                    Text("Kategori: \(recipe.wrappedValue.recipeCategory!)")
+                    Text("Landområde: \(recipe.wrappedValue.recipeArea!)")
                     Text("Ingredienser:")
-                    Text("\(recipe.wrappedValue.recipeIngredient1)")
-                    Text("\(recipe.wrappedValue.recipeIngredient2)")
-                    Text("\(recipe.wrappedValue.recipeIngredient3)")
+                    Text("\(recipe.wrappedValue.recipeIngredient1!)")
+                    Text("\(recipe.wrappedValue.recipeIngredient2!)")
+                    Text("\(recipe.wrappedValue.recipeIngredient3!)")
                 }
                 .padding(.leading, 40)
                 .padding(.top, 10)
