@@ -16,13 +16,27 @@ struct RatatouilleApp: App {
     @State var savedRecipes = MyRecipes.demoRecipes
     @State var archivedRecipes = [Recipe]()
     
+    @State var darkModeToggle: Bool = false
+    
+    func retrieveDarkMode() {
+        
+        darkModeToggle = UserDefaults.standard.bool(forKey: "DarkModeToggle")
+        
+//        let defaults = UserDefaults.standard
+//        
+//        if case let isDarkModeOn as Bool = defaults.value(forKey: "DarkModeToggle") {
+//            darkModeToggle = isDarkModeOn
+//        } else {
+//            return
+//        }
+    }
+    
     var body: some Scene {
         WindowGroup {
+            
             if splashCreenSsActive {
                 SplashScreenView(isActive: $splashCreenSsActive)
             } else {
-                
-                Text("Ratatouille")
                 
                 TabView {
                     MyRecipesView(savedRecipes: $savedRecipes, archivedRecipes: $archivedRecipes)
@@ -35,11 +49,15 @@ struct RatatouilleApp: App {
                             Label("Søk", systemImage: "magnifyingglass.circle")
                         }
                     
-                    SettingsView()
+                    SettingsView(darkModeToggle: $darkModeToggle)
                         .tabItem {
                             Label("Innstillinger", systemImage: "gearshape.fill")
                         }
                 }
+                .onAppear {
+                    retrieveDarkMode()
+                }
+                .preferredColorScheme(darkModeToggle ? .dark : .light)
                 
             }
         }

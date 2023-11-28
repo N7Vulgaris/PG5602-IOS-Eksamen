@@ -41,47 +41,49 @@ struct MyRecipesView: View {
     }
     
     var body: some View {
-        
-        if savedRecipes.wrappedValue.isEmpty {
-            VStack {
-                Image(systemName: "square.stack.3d.up.slash")
-                    .scaleEffect(2.5)
-                    .padding(.bottom)
-                Text("Ingen matoppskrifter")
-                    .font(.system(size: 25))
-            }
-        } else {
-            
-            // TODO: Add NavigationStack and NavigationLinks for RecipeDetailView
-            
-            NavigationStack {
-                List {
-                    ForEach(savedRecipes) { recipe in
-                        NavigationLink {
-//                            RecipeDetailView(recipe: recipe)
-                            // TODO: Add RecipeEditView here
-                        } label: {
-                            RecipeListItemView(recipe: recipe)
-                                .swipeActions(edge: .leading, allowsFullSwipe: true) {
-                                    Button(action: {
-                                        favoriteRecipe(recipe: recipe)
-                                    }, label: {
-                                        Image(systemName: "star.fill")
-                                            .tint(.yellow)
-                                    })
-                                }
-                                .swipeActions(edge: .trailing, allowsFullSwipe: true) {
-                                    Button(action: {
-                                        archiveRecipe(recipe: recipe)
-                                    }, label: {
-                                        Image(systemName: "xmark.bin.fill")
-                                            .tint(.blue)
-                                    })
-                                }
+        VStack {
+            Text("Ratatouille")
+            if savedRecipes.wrappedValue.isEmpty {
+                VStack {
+                    Image(systemName: "square.stack.3d.up.slash")
+                        .scaleEffect(2.5)
+                        .padding(.bottom)
+                    Text("Ingen matoppskrifter")
+                        .font(.system(size: 25))
+                }
+            } else {
+                
+                // TODO: Add NavigationStack and NavigationLinks for RecipeDetailView
+                
+                NavigationStack {
+                    List {
+                        ForEach(savedRecipes) { recipe in
+                            NavigationLink {
+                                //                            RecipeDetailView(recipe: recipe)
+                                // TODO: Add RecipeEditView here
+                            } label: {
+                                RecipeListItemView(recipe: recipe)
+                                    .swipeActions(edge: .leading, allowsFullSwipe: true) {
+                                        Button(action: {
+                                            favoriteRecipe(recipe: recipe)
+                                        }, label: {
+                                            Image(systemName: "star.fill")
+                                                .tint(.yellow)
+                                        })
+                                    }
+                                    .swipeActions(edge: .trailing, allowsFullSwipe: true) {
+                                        Button(action: {
+                                            archiveRecipe(recipe: recipe)
+                                        }, label: {
+                                            Image(systemName: "xmark.bin.fill")
+                                                .tint(.blue)
+                                        })
+                                    }
+                            }
                         }
                     }
+                    .navigationTitle("Matoppskrifter")
                 }
-                .navigationTitle("Matoppskrifter")
             }
         }
     }

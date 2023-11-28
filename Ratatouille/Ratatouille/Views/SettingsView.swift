@@ -9,7 +9,8 @@ import SwiftUI
 
 struct SettingsView: View {
     
-    @State var darkModeToggle: Bool = false
+//    @State var darkModeToggle: Bool = false
+    var darkModeToggle: Binding<Bool>
     
     var body: some View {
         VStack {
@@ -43,8 +44,13 @@ struct SettingsView: View {
                         }
                     }
                     Section {
-                        Toggle("Akriver mørk modus", systemImage: "moon.circle", isOn: $darkModeToggle)
-                            .preferredColorScheme(darkModeToggle ? .dark : .light)
+                        Toggle("Akriver mørk modus", systemImage: "moon.circle", isOn: darkModeToggle)
+                            .onChange(of: darkModeToggle.wrappedValue) {
+                                // TODO: Improve this. It doesn't alwasy save correctyl
+                                UserDefaults.standard.set(darkModeToggle.wrappedValue, forKey: "DarkModeToggle")
+                            }
+                        
+//                            .preferredColorScheme(darkModeToggle.wrappedValue ? .dark : .light)
                         // TODO: save darkModeToggle as Keychain or Codable to keep persitency
                     }
                     Section {
@@ -55,9 +61,13 @@ struct SettingsView: View {
                 .navigationTitle("Innstillinger")
             }
         }
+//        .onDisappear {
+//            let defaults = UserDefaults.standard
+//            defaults.set(darkModeToggle, forKey: "DarkOrLightMode")
+//        }
     }
 }
 
 #Preview {
-    SettingsView()
+    SettingsView(darkModeToggle: .constant(false))
 }
