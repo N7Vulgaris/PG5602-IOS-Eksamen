@@ -20,7 +20,7 @@ struct MyRecipes: Codable {
 struct Recipe: Identifiable, Codable {
     let id: UUID = UUID()
     
-    let recipeName: String
+    var recipeName: String
     let recipeImage: String?
     let recipeCategory: String?
     let recipeArea: String?

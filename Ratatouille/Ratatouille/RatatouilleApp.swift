@@ -12,13 +12,14 @@ struct RatatouilleApp: App {
     @State var splashCreenSsActive = true
     
 //    @State var savedRecipes: MyRecipes = MyRecipes(recipes: [Recipe]())
-//    @State var savedRecipes = [Recipe]()
-    @State var savedRecipes = MyRecipes.demoRecipes
+    @State var savedRecipes = [Recipe]()
+//    @State var savedRecipes = MyRecipes.demoRecipes
     @State var archivedRecipes = [Recipe]()
     
     @State var darkModeToggle: Bool = false
     
     @StateObject var dataController = DataController()
+//    @FetchRequest(sortDescriptors: [.init(key: "name", ascending: true)]) var meals: FetchedResults<Meal>
     
     func retrieveDarkMode() {
         
@@ -33,6 +34,16 @@ struct RatatouilleApp: App {
 //        }
     }
     
+//    func getRecipesFromDb() {
+//        
+//        for meal in meals {
+//            let newMeal = Recipe.init(recipeName: meal.name!, recipeImage: meal.imageUrl, recipeCategory: meal.category?.name, recipeArea: meal.area?.name, recipeInstructions: "", recipeIngredient1: "", recipeIngredient2: "", recipeIngredient3: "", recipeIsFavorited: false)
+//            
+//            savedRecipes.append(newMeal)
+//        }
+//        
+//    }
+    
     var body: some Scene {
         WindowGroup {
             
@@ -45,6 +56,9 @@ struct RatatouilleApp: App {
                         .tabItem {
                             Label("Mine oppskrifter", systemImage: "fork.knife.circle")
                         }
+//                        .onAppear {
+//                            getRecipesFromDb()
+//                        }
                     
                     SearchView(savedRecipes: $savedRecipes)
                         .tabItem {
@@ -58,6 +72,7 @@ struct RatatouilleApp: App {
                 }
                 .onAppear {
                     retrieveDarkMode()
+//                    getRecipesFromDb()
                 }
                 .preferredColorScheme(darkModeToggle ? .dark : .light)
                 .environment(\.managedObjectContext, dataController.container.viewContext)

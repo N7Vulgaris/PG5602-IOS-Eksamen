@@ -18,26 +18,26 @@ class DataController: ObservableObject {
             if let error = error {
                 print("Error loading Core Data: \(error)")
             }
-//            print(description)
+//            print(description) // <- DB filepath
         }
 //        getMeals()
     }
     
 //    static let shared = DataController()
     
-//    func getMeals() -> [Meal] {
-//        
-//        let request = NSFetchRequest<Meal>(entityName: "Meal")
-//        var fetchedMeals = [Meal]()
-//        
-//        do {
-//            fetchedMeals = try container.viewContext.fetch(request)
-//        } catch let error {
-//            print("Error fetching: \(error)")
-//        }
-//        return fetchedMeals
-//    }
-//    
+    func getMeals() -> [Meal] {
+        
+        let request = NSFetchRequest<Meal>(entityName: "Meal")
+        var fetchedMeals = [Meal]()
+        
+        do {
+            fetchedMeals = try container.viewContext.fetch(request)
+        } catch let error {
+            print("Error fetching: \(error)")
+        }
+        return fetchedMeals
+    }
+    
 //    func addMeal() {
 //        
 //        let newMeal = Meal(context: container.viewContext)
@@ -54,5 +54,5 @@ class DataController: ObservableObject {
 //            print("Error saving: \(error)")
 //        }
 //    }
-//    
+    
 }

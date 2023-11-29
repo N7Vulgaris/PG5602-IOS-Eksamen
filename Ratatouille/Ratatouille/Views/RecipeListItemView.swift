@@ -17,6 +17,9 @@ struct RecipeListItemView: View {
 //    }
     
     var recipe: Binding<Recipe>
+//    var recipe: Meal
+    
+    
 //    @State var isFavorited: Bool = false
     
     var body: some View {

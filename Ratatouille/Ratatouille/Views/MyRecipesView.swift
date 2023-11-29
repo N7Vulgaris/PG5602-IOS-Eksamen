@@ -18,6 +18,9 @@ struct MyRecipesView: View {
     var savedRecipes: Binding<[Recipe]>
     var archivedRecipes: Binding<[Recipe]>
     
+    @Environment(\.managedObjectContext) var moc
+    @FetchRequest(sortDescriptors: [.init(key: "name", ascending: true)]) var meals: FetchedResults<Meal>
+    
     func archiveRecipe(recipe: Binding<Recipe>) {
         // TODO: ALSO get this shit working:
         var hasRemoved = false
@@ -40,9 +43,23 @@ struct MyRecipesView: View {
         
     }
     
+    func getRecipesFromDb() {
+        
+        for meal in meals {
+            let newMeal = Recipe.init(recipeName: meal.name!, recipeImage: meal.imageUrl, recipeCategory: meal.category?.name, recipeArea: meal.area?.name, recipeInstructions: "", recipeIngredient1: "", recipeIngredient2: "", recipeIngredient3: "", recipeIsFavorited: false)
+            // TODO: Add recipeIsFavorited as an attribute in the DB
+            
+            
+            if !savedRecipes.wrappedValue.contains(where: { $0.recipeName == newMeal.recipeName }) {
+                savedRecipes.wrappedValue.append(newMeal)
+            }
+        }
+    }
+    
     var body: some View {
         VStack {
-            Text("Ratatouille")
+//            Text("Ratatouille")
+//            Spacer()
             if savedRecipes.wrappedValue.isEmpty {
                 VStack {
                     Image(systemName: "square.stack.3d.up.slash")
@@ -85,6 +102,9 @@ struct MyRecipesView: View {
                     .navigationTitle("Matoppskrifter")
                 }
             }
+        }
+        .onAppear {
+            getRecipesFromDb()
         }
     }
     
