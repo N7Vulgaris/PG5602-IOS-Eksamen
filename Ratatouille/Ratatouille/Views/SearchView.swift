@@ -41,13 +41,29 @@ struct SearchView: View {
     }
     
     func saveRecipe(recipe: Binding<Recipe>) {
-//        savedRecipes.wrappedValue.append(recipe.wrappedValue)
-        let entity = NSEntityDescription.entity(forEntityName: "", in: moc)!
-        let meal = Meal(entity: entity, insertInto: moc)
+        print("I'm savin ovah here!")
+        
+        let meal = Meal(context: moc)
+        let area = Area(context: moc)
+        let category = Category(context: moc)
+        let ingredient1 = Ingredient(context: moc)
+        let ingredient2 = Ingredient(context: moc)
+        let ingredient3 = Ingredient(context: moc)
+        
+        area.name = recipe.wrappedValue.recipeArea
+        category.name = recipe.wrappedValue.recipeCategory
+        ingredient1.name = recipe.wrappedValue.recipeIngredient1
+        ingredient2.name = recipe.wrappedValue.recipeIngredient2
+        ingredient3.name = recipe.wrappedValue.recipeIngredient3
+        // TODO: Change it so that ALL the ingredients are converted and added
+        
         meal.name = recipe.wrappedValue.recipeName
-        meal.area?.name = recipe.wrappedValue.recipeArea
-        meal.category?.name = recipe.wrappedValue.recipeCategory
         meal.imageUrl = recipe.wrappedValue.recipeImage
+        meal.area = area
+        meal.category = category
+        meal.ingredient = [ingredient1, ingredient2, ingredient3]
+        
+        moc.saveAndPrintError()
     }
     
     var body: some View {
@@ -129,8 +145,6 @@ struct SearchView: View {
                                 .swipeActions(edge: .trailing, allowsFullSwipe: true) {
                                     Button(action: {
                                         saveRecipe(recipe: recipe)
-                                        print("trailing")
-                                        print(savedRecipes.wrappedValue)
                                     }, label: {
                                         Image(systemName: "square.grid.3x1.folder.fill.badge.plus")
                                             .tint(.blue)
