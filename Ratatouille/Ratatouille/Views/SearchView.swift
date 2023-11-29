@@ -6,12 +6,15 @@
 //
 
 import SwiftUI
+import CoreData
 
 struct SearchView: View {
     
     init(savedRecipes: Binding<[Recipe]> ) {
         self.savedRecipes = savedRecipes
     }
+    
+    @Environment(\.managedObjectContext) var moc
     
     @State var searchInput: String = ""
     @State var searchWindowIsPresented: Bool = false
@@ -38,7 +41,13 @@ struct SearchView: View {
     }
     
     func saveRecipe(recipe: Binding<Recipe>) {
-        savedRecipes.wrappedValue.append(recipe.wrappedValue)
+//        savedRecipes.wrappedValue.append(recipe.wrappedValue)
+        let entity = NSEntityDescription.entity(forEntityName: "", in: moc)!
+        let meal = Meal(entity: entity, insertInto: moc)
+        meal.name = recipe.wrappedValue.recipeName
+        meal.area?.name = recipe.wrappedValue.recipeArea
+        meal.category?.name = recipe.wrappedValue.recipeCategory
+        meal.imageUrl = recipe.wrappedValue.recipeImage
     }
     
     var body: some View {
@@ -139,4 +148,14 @@ struct SearchView: View {
 
 #Preview {
     SearchView(savedRecipes: .constant( [Recipe]() ))
+}
+
+extension NSManagedObjectContext {
+    func saveAndPrintError() {
+        do {
+            try self.save()
+        } catch let error {
+            print(error)
+        }
+    }
 }

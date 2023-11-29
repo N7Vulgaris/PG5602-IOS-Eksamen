@@ -18,6 +18,8 @@ struct RatatouilleApp: App {
     
     @State var darkModeToggle: Bool = false
     
+    @StateObject var dataController = DataController()
+    
     func retrieveDarkMode() {
         
         darkModeToggle = UserDefaults.standard.bool(forKey: "DarkModeToggle")
@@ -58,6 +60,7 @@ struct RatatouilleApp: App {
                     retrieveDarkMode()
                 }
                 .preferredColorScheme(darkModeToggle ? .dark : .light)
+                .environment(\.managedObjectContext, dataController.container.viewContext)
                 
             }
         }

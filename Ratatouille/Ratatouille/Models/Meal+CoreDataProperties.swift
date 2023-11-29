@@ -2,7 +2,7 @@
 //  Meal+CoreDataProperties.swift
 //  Ratatouille
 //
-//  Created by Simen Hansen on 28/11/2023.
+//  Created by Simen Hansen on 29/11/2023.
 //
 //
 
@@ -16,10 +16,10 @@ extension Meal {
         return NSFetchRequest<Meal>(entityName: "Meal")
     }
 
-    @NSManaged public var name: String?
     @NSManaged public var imageUrl: String?
+    @NSManaged public var name: String?
     @NSManaged public var area: Area?
-    @NSManaged public var caregory: Category?
+    @NSManaged public var category: Category?
     @NSManaged public var ingredient: NSSet?
 
 }

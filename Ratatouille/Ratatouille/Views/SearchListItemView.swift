@@ -18,7 +18,7 @@ struct SearchListItemView: View {
     var body: some View {
         
         HStack {
-            AsyncImage(url: recipe.wrappedValue.recipeImage, scale: 20) { image in
+            AsyncImage(url: URL.init(string: recipe.wrappedValue.recipeImage!) , scale: 20) { image in
                 image
                     .resizable()
                     .aspectRatio(contentMode: .fit)

@@ -2,7 +2,7 @@
 //  Category+CoreDataProperties.swift
 //  Ratatouille
 //
-//  Created by Simen Hansen on 28/11/2023.
+//  Created by Simen Hansen on 29/11/2023.
 //
 //
 

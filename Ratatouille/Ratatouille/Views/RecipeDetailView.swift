@@ -18,7 +18,7 @@ struct RecipeDetailView: View {
     var body: some View {
         NavigationStack {
             VStack(alignment: .leading) {
-                AsyncImage(url: recipe.wrappedValue.recipeImage) { image in
+                AsyncImage(url: URL.init(string: recipe.wrappedValue.recipeImage!)) { image in
                     image
                         .resizable()
                         .aspectRatio(contentMode: .fit)
