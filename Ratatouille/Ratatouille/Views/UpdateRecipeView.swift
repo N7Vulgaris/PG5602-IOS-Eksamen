@@ -10,8 +10,9 @@ import CoreData
 
 struct UpdateRecipeView: View {
     
-    init(recipe: Binding<Recipe>) {
+    init(recipe: Binding<Recipe>, isPresented: Binding<Bool>) {
         self.recipe = recipe
+        self.isPresented = isPresented
     }
     
     let recipe: Binding<Recipe>
@@ -19,6 +20,8 @@ struct UpdateRecipeView: View {
     @FetchRequest(sortDescriptors: [.init(key: "name", ascending: true)]) var savedAreas: FetchedResults<Area>
     @FetchRequest(sortDescriptors: [.init(key: "name", ascending: true)]) var savedCategories: FetchedResults<Category>
 //    @FetchRequest(sortDescriptors: [.init(key: "name", ascending: true)]) var savedMeals: FetchedResults<Meal>
+    
+    var isPresented: Binding<Bool>
     
     @State var newName: String = ""
     @State var newArea: String = ""
@@ -54,6 +57,7 @@ struct UpdateRecipeView: View {
         }
         
         moc.saveAndPrintError()
+        isPresented.wrappedValue = false
         print("Updated!")
         
     }
@@ -70,7 +74,7 @@ struct UpdateRecipeView: View {
                 Color.gray
             }
             .mask(RoundedRectangle(cornerSize: CGSize(width: 20, height: 10)))
-            .padding(.horizontal)
+            .padding()
             
                     
             Form {
@@ -131,5 +135,5 @@ struct UpdateRecipeView: View {
 }
 
 #Preview {
-    UpdateRecipeView(recipe: .constant(MyRecipes.demoRecipe))
+    UpdateRecipeView(recipe: .constant(MyRecipes.demoRecipe), isPresented: .constant(true))
 }

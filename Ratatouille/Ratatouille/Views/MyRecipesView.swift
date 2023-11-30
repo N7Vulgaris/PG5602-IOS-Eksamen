@@ -19,12 +19,14 @@ struct MyRecipesView: View {
     var savedRecipes: Binding<[Recipe]>
     var archivedRecipes: Binding<[Recipe]>
     
+    @State var isPresentingUpdateView: Bool = false
+    
     @Environment(\.managedObjectContext) var moc
     @FetchRequest(sortDescriptors: [.init(key: "name", ascending: true)]) var savedMeals: FetchedResults<Meal>
     
-    func archiveRecipe(recipe: Binding<Recipe>) {        
+    func archiveRecipe(recipe: Binding<Recipe>) {
         recipe.wrappedValue.recipeIsArchived = !recipe.wrappedValue.recipeIsArchived
-    
+        
         let requestedMeal = fetchMealByName(recipe: recipe)
         
         for meal in requestedMeal {
@@ -36,7 +38,7 @@ struct MyRecipesView: View {
     
     func favoriteRecipe(recipe: Binding<Recipe>) {
         recipe.wrappedValue.recipeIsFavorited = !recipe.wrappedValue.recipeIsFavorited
-    
+        
         let requestedMeal = fetchMealByName(recipe: recipe)
         
         for meal in requestedMeal {
@@ -50,7 +52,7 @@ struct MyRecipesView: View {
     func fetchMealByName(recipe: Binding<Recipe>) -> [Meal] {
         
         let request = NSFetchRequest<Meal>(entityName: "Meal")
-//        let name = recipe.wrappedValue.recipeName
+        //        let name = recipe.wrappedValue.recipeName
         let predicate = NSPredicate(format: "name == %@", recipe.wrappedValue.recipeName)
         request.predicate = predicate
         
@@ -76,8 +78,8 @@ struct MyRecipesView: View {
     
     var body: some View {
         VStack {
-//            Text("Ratatouille")
-//            Spacer()
+            //            Text("Ratatouille")
+            //            Spacer()
             if savedRecipes.wrappedValue.isEmpty {
                 VStack {
                     Image(systemName: "square.stack.3d.up.slash")
@@ -94,8 +96,32 @@ struct MyRecipesView: View {
                     List {
                         ForEach(savedRecipes) { recipe in
                             if recipe.wrappedValue.recipeIsArchived == false {
-                                NavigationLink {
-                                    UpdateRecipeView(recipe: recipe)
+                                //                                NavigationLink {
+                                //
+                                //                                } label: {
+                                //                                    RecipeListItemView(recipe: recipe)
+                                //                                        .swipeActions(edge: .leading, allowsFullSwipe: true) {
+                                //                                            Button(action: {
+                                //                                                favoriteRecipe(recipe: recipe)
+                                //                                            }, label: {
+                                //                                                Image(systemName: "star.fill")
+                                //                                                    .tint(.yellow)
+                                //                                            })
+                                //                                        }
+                                //                                        .swipeActions(edge: .trailing, allowsFullSwipe: true) {
+                                //                                            Button(action: {
+                                //                                                archiveRecipe(recipe: recipe)
+                                //                                            }, label: {
+                                //                                                Image(systemName: "xmark.bin.fill")
+                                //                                                    .tint(.blue)
+                                //                                            })
+                                //                                        }
+                                //                                }
+                                //                                .sheet(isPresented: $isPresentingUpdateView, content: {
+                                //                                    UpdateRecipeView(recipe: recipe, isPresented: $isPresentingUpdateView)
+                                //                                })
+                                Button {
+                                    isPresentingUpdateView = true
                                 } label: {
                                     RecipeListItemView(recipe: recipe)
                                         .swipeActions(edge: .leading, allowsFullSwipe: true) {
@@ -115,6 +141,10 @@ struct MyRecipesView: View {
                                             })
                                         }
                                 }
+                                .sheet(isPresented: $isPresentingUpdateView, content: {
+                                    UpdateRecipeView(recipe: recipe, isPresented: $isPresentingUpdateView)
+                                })
+                                
                             }
                         }
                     }
