@@ -14,6 +14,8 @@
     </entity>
     <entity name="Meal" representedClassName="Meal" syncable="YES">
         <attribute name="imageUrl" optional="YES" attributeType="String"/>
+        <attribute name="isArchived" optional="YES" attributeType="Boolean" usesScalarValueType="YES"/>
+        <attribute name="isFavorited" optional="YES" attributeType="Boolean" usesScalarValueType="YES"/>
         <attribute name="name" optional="YES" attributeType="String"/>
         <relationship name="area" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="Area" inverseName="meal" inverseEntity="Area"/>
         <relationship name="category" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="Category" inverseName="meal" inverseEntity="Category"/>

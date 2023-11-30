@@ -6,6 +6,7 @@
 //
 
 import SwiftUI
+import CoreData
 
 @main
 struct RatatouilleApp: App {
@@ -57,7 +58,12 @@ struct RatatouilleApp: App {
                             Label("Mine oppskrifter", systemImage: "fork.knife.circle")
                         }
 //                        .onAppear {
-//                            getRecipesFromDb()
+//                            let request = NSFetchRequest<Meal>(entityName: "Meal")
+//                            var fetchedMeals = dataController.getMeals()
+//                            
+//                            for meal in fetchedMeals {
+//                                print(meal.name)
+//                            }
 //                        }
                     
                     SearchView(savedRecipes: $savedRecipes)

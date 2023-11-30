@@ -16,9 +16,13 @@ struct RecipeListItemView: View {
 //        self.recipe = recipe
 //    }
     
-    var recipe: Binding<Recipe>
-//    var recipe: Meal
+    init(recipe: Binding<Recipe>) {
+        self.recipe = recipe
+    }
     
+    var recipe: Binding<Recipe>
+    
+//    var meal: Meal
     
 //    @State var isFavorited: Bool = false
     
@@ -34,6 +38,8 @@ struct RecipeListItemView: View {
             .frame(width: 60)
             .mask(Circle())
             
+            
+            
             VStack(alignment: .leading) {
                 Text("\(recipe.wrappedValue.recipeName)")
                 Text("\(recipe.wrappedValue.recipeCategory!)")
@@ -46,9 +52,6 @@ struct RecipeListItemView: View {
                     .padding(.horizontal)
                     .foregroundStyle(.yellow)
             }
-            
-//            Image(systemName: "chevron.right")
-            
         }
         .padding(.vertical)
 //        Divider()

@@ -41,7 +41,6 @@ struct SearchView: View {
     }
     
     func saveRecipe(recipe: Binding<Recipe>) {
-        print("I'm savin ovah here!")
         
         let meal = Meal(context: moc)
         let area = Area(context: moc)
@@ -59,6 +58,8 @@ struct SearchView: View {
         
         meal.name = recipe.wrappedValue.recipeName
         meal.imageUrl = recipe.wrappedValue.recipeImage
+        meal.isFavorited = recipe.wrappedValue.recipeIsFavorited
+        meal.isArchived = recipe.wrappedValue.recipeIsArchived
         meal.area = area
         meal.category = category
         meal.ingredient = [ingredient1, ingredient2, ingredient3]

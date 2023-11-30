@@ -18,7 +18,7 @@ class DataController: ObservableObject {
             if let error = error {
                 print("Error loading Core Data: \(error)")
             }
-//            print(description) // <- DB filepath
+            print(description) // <- DB filepath
         }
 //        getMeals()
     }
