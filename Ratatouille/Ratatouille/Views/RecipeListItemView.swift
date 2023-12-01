@@ -9,22 +9,11 @@ import SwiftUI
 
 struct RecipeListItemView: View {
     
-//    var swipeLeft: (() -> ())
-//    var swipeRight: (() -> ())
-    
-//    init(recipe: Binding<MyRecipes>) {
-//        self.recipe = recipe
-//    }
-    
     init(recipe: Binding<Recipe>) {
         self.recipe = recipe
     }
     
     var recipe: Binding<Recipe>
-    
-//    var meal: Meal
-    
-//    @State var isFavorited: Bool = false
     
     var body: some View {
         HStack {
@@ -42,9 +31,10 @@ struct RecipeListItemView: View {
             
             VStack(alignment: .leading) {
                 Text("\(recipe.wrappedValue.recipeName)")
-                Text("\(recipe.wrappedValue.recipeCategory!)")
+                Divider()
+                Text("\(recipe.wrappedValue.recipeCategory ?? "")")
                 }
-                .frame(maxWidth: 100, maxHeight: 100)
+                .frame(maxWidth: 150, maxHeight: 90)
             Spacer()
             
             if recipe.wrappedValue.recipeIsFavorited == true {

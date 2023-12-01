@@ -2,7 +2,7 @@
 //  Meal+CoreDataProperties.swift
 //  Ratatouille
 //
-//  Created by Simen Hansen on 30/11/2023.
+//  Created by Simen Hansen on 01/12/2023.
 //
 //
 
@@ -17,9 +17,8 @@ extension Meal {
     }
 
     @NSManaged public var imageUrl: String?
-    @NSManaged public var name: String?
     @NSManaged public var isFavorited: Bool
-    @NSManaged public var isArchived: Bool
+    @NSManaged public var name: String?
     @NSManaged public var area: Area?
     @NSManaged public var category: Category?
     @NSManaged public var ingredient: NSSet?

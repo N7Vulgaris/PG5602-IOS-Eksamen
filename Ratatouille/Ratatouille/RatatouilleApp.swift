@@ -71,7 +71,7 @@ struct RatatouilleApp: App {
                             Label("Søk", systemImage: "magnifyingglass.circle")
                         }
                     
-                    SettingsView(darkModeToggle: $darkModeToggle)
+                    SettingsView(darkModeToggle: $darkModeToggle, savedRecipes: $savedRecipes, archivedRecipes: $archivedRecipes)
                         .tabItem {
                             Label("Innstillinger", systemImage: "gearshape.fill")
                         }

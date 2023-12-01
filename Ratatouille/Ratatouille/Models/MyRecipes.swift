@@ -31,7 +31,7 @@ struct Recipe: Identifiable, Codable {
 //    let recipeIngredients: [String]
     
     var recipeIsFavorited: Bool = false
-    var recipeIsArchived: Bool = false
+//    var recipeIsArchived: Bool = false
     
     enum CodingKeys: String, CodingKey {
         case recipeName = "strMeal"

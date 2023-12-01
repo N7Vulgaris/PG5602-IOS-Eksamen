@@ -1,5 +1,5 @@
 //
-//  Area+CoreDataClass.swift
+//  ArchivedMeal+CoreDataClass.swift
 //  Ratatouille
 //
 //  Created by Simen Hansen on 01/12/2023.
@@ -9,7 +9,7 @@
 import Foundation
 import CoreData
 
-@objc(Area)
-public class Area: NSManagedObject {
+@objc(ArchivedMeal)
+public class ArchivedMeal: NSManagedObject {
 
 }

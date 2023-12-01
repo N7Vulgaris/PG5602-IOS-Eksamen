@@ -31,6 +31,7 @@ struct SearchListItemView: View {
             
             VStack(alignment: .leading) {
                 Text("\(recipe.wrappedValue.recipeName)")
+                Divider()
                 Text("\(recipe.wrappedValue.recipeCategory!)")
                 }
             Spacer()

@@ -59,7 +59,7 @@ struct SearchView: View {
         meal.name = recipe.wrappedValue.recipeName
         meal.imageUrl = recipe.wrappedValue.recipeImage
         meal.isFavorited = recipe.wrappedValue.recipeIsFavorited
-        meal.isArchived = recipe.wrappedValue.recipeIsArchived
+//        meal.isArchived = recipe.wrappedValue.recipeIsArchived
         meal.area = area
         meal.category = category
         meal.ingredient = [ingredient1, ingredient2, ingredient3]
@@ -128,6 +128,8 @@ struct SearchView: View {
                 
                 HStack {
                     TextField("Søk...", text: $searchInput)
+                        .autocorrectionDisabled(true)
+                        .textInputAutocapitalization(.never)
                     Spacer()
                     
                     Button("Søk") {
@@ -142,7 +144,7 @@ struct SearchView: View {
                         NavigationLink {
                             RecipeDetailView(recipe: recipe)
                         } label: {
-                            SearchListItemView(recipe: recipe)
+                            RecipeListItemView(recipe: recipe)
                                 .swipeActions(edge: .trailing, allowsFullSwipe: true) {
                                     Button(action: {
                                         saveRecipe(recipe: recipe)

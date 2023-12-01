@@ -1,5 +1,13 @@
 <?xml version="1.0" encoding="UTF-8" standalone="yes"?>
 <model type="com.apple.IDECoreDataModeler.DataModel" documentVersion="1.0" lastSavedToolsVersion="22222" systemVersion="23B81" minimumToolsVersion="Automatic" sourceLanguage="Swift" usedWithSwiftData="YES" userDefinedModelVersionIdentifier="">
+    <entity name="ArchivedMeal" representedClassName="ArchivedMeal" syncable="YES">
+        <attribute name="area" optional="YES" attributeType="String"/>
+        <attribute name="category" optional="YES" attributeType="String"/>
+        <attribute name="imageUrl" optional="YES" attributeType="String"/>
+        <attribute name="ingredient" optional="YES" attributeType="String"/>
+        <attribute name="isFavorited" optional="YES" attributeType="Boolean" usesScalarValueType="YES"/>
+        <attribute name="name" optional="YES" attributeType="String"/>
+    </entity>
     <entity name="Area" representedClassName="Area" syncable="YES">
         <attribute name="name" optional="YES" attributeType="String"/>
         <relationship name="meal" optional="YES" toMany="YES" deletionRule="Nullify" destinationEntity="Meal" inverseName="area" inverseEntity="Meal"/>
@@ -14,7 +22,6 @@
     </entity>
     <entity name="Meal" representedClassName="Meal" syncable="YES">
         <attribute name="imageUrl" optional="YES" attributeType="String"/>
-        <attribute name="isArchived" optional="YES" attributeType="Boolean" usesScalarValueType="YES"/>
         <attribute name="isFavorited" optional="YES" attributeType="Boolean" usesScalarValueType="YES"/>
         <attribute name="name" optional="YES" attributeType="String"/>
         <relationship name="area" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="Area" inverseName="meal" inverseEntity="Area"/>

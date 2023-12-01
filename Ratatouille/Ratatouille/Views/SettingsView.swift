@@ -12,6 +12,9 @@ struct SettingsView: View {
 //    @State var darkModeToggle: Bool = false
     var darkModeToggle: Binding<Bool>
     
+    var savedRecipes: Binding<[Recipe]>
+    var archivedRecipes: Binding<[Recipe]>
+    
     var body: some View {
         VStack {
             NavigationStack {
@@ -54,7 +57,12 @@ struct SettingsView: View {
                         // TODO: save darkModeToggle as Keychain or Codable to keep persitency
                     }
                     Section {
-                        Label("Administrere arkiv", systemImage: "xmark.bin.fill")
+                        
+                        NavigationLink {
+                            ManageArchiveView(savedRecipes: savedRecipes, archivedRecipes: archivedRecipes)
+                        } label: {
+                            Label("Administrere arkiv", systemImage: "xmark.bin.fill")
+                        }
                     }
                     
                 }
@@ -69,5 +77,5 @@ struct SettingsView: View {
 }
 
 #Preview {
-    SettingsView(darkModeToggle: .constant(false))
+    SettingsView(darkModeToggle: .constant(false), savedRecipes: .constant(MyRecipes.demoRecipes), archivedRecipes: .constant(MyRecipes.demoRecipes))
 }
