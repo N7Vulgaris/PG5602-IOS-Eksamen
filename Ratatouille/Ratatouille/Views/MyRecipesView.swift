@@ -96,6 +96,7 @@ struct MyRecipesView: View {
                 savedRecipes.wrappedValue.append(newMeal)
             }
         }
+        print("Wahoo!")
     }
     
     func getArchiveFromDb() {
@@ -140,14 +141,14 @@ struct MyRecipesView: View {
                 }
             } else {
                 
-                // TODO: Add NavigationStack and NavigationLinks for RecipeDetailView
-                
                 NavigationStack {
                     List {
                         ForEach(savedRecipes) { recipe in
                                 NavigationLink {
 //                                    isPresentingUpdateView = true
-                                    UpdateRecipeView(recipe: recipe)
+                                    UpdateRecipeView(recipe: recipe, refreshSavedRecipes: {
+                                        getRecipesFromDb()
+                                    })
                                 } label: {
                                     RecipeListItemView(recipe: recipe)
                                         .swipeActions(edge: .leading, allowsFullSwipe: true) {

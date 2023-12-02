@@ -10,8 +10,9 @@ import CoreData
 
 struct UpdateRecipeView: View {
     
-    init(recipe: Binding<Recipe>) {
+    init(recipe: Binding<Recipe>, refreshSavedRecipes: @escaping (() -> ())) {
         self.recipe = recipe
+        self.refreshSavedRecipes = refreshSavedRecipes
 //        self.isPresented = isPresented
     }
     
@@ -23,6 +24,8 @@ struct UpdateRecipeView: View {
     
 //    var isPresented: Binding<Bool>
     @Environment(\.dismiss) var dismiss
+    
+    var refreshSavedRecipes: (() -> ())
     
     @State var newName: String = ""
     @State var newArea: String = ""
@@ -60,7 +63,7 @@ struct UpdateRecipeView: View {
         moc.saveAndPrintError()
         
 //        isPresented.wrappedValue = false
-        
+        refreshSavedRecipes()
         dismiss()
     }
     
@@ -140,5 +143,7 @@ struct UpdateRecipeView: View {
 }
 
 #Preview {
-    UpdateRecipeView(recipe: .constant(MyRecipes.demoRecipe))
+    UpdateRecipeView(recipe: .constant(MyRecipes.demoRecipe)) {
+        print("Refresh")
+    }
 }

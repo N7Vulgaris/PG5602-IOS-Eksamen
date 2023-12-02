@@ -36,22 +36,21 @@ struct ManageArchiveView: View {
     func restoreMeal(mealToRestore: Binding<Recipe>) {
         
         let requestedMeal = fetchMealByName(recipe: mealToRestore)
+        
         // Add to saved DB
         let entity = NSEntityDescription.entity(forEntityName: "Meal", in: moc)!
         // Remove from archive DB
         for meal in requestedMeal {
             
-//            moc.delete(meal)
-//            moc.saveAndPrintError()
+//            print(meal.name)
             
-            let mealToRestore = Meal(entity: entity, insertInto: moc)
-            mealToRestore.name = meal.name
-            mealToRestore.area?.name = meal.area?.name
-            mealToRestore.category?.name = meal.area?.name
-            mealToRestore.imageUrl = meal.imageUrl
-            mealToRestore.isFavorited = meal.isFavorited
+            let newMeal = Meal(entity: entity, insertInto: moc)
+            newMeal.name = meal.name
+            newMeal.area?.name = meal.area
+            newMeal.category?.name = meal.category
+            newMeal.imageUrl = meal.imageUrl
+            newMeal.isFavorited = meal.isFavorited
             moc.delete(meal)
-            moc.saveAndPrintError()
         }
         
         
@@ -70,20 +69,21 @@ struct ManageArchiveView: View {
         }
     }
     
-    func fetchMealByName(recipe: Binding<Recipe>) -> [Meal] {
+    func fetchMealByName(recipe: Binding<Recipe>) -> [ArchivedMeal] {
         
-        let request = NSFetchRequest<Meal>(entityName: "Meal")
+        let request = NSFetchRequest<ArchivedMeal>(entityName: "ArchivedMeal")
         //        let name = recipe.wrappedValue.recipeName
         let predicate = NSPredicate(format: "name == %@", recipe.wrappedValue.recipeName)
         request.predicate = predicate
         
-        var requestedMeal = [Meal]()
+        var requestedMeal = [ArchivedMeal]()
         
         do {
             requestedMeal = try moc.fetch(request)
         } catch let error {
             print(error)
         }
+        
         return requestedMeal
     }
     
