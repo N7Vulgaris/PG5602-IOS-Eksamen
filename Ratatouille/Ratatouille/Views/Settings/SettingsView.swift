@@ -6,10 +6,10 @@
 //
 
 import SwiftUI
+import CoreData
 
 struct SettingsView: View {
     
-//    @State var darkModeToggle: Bool = false
     @Environment(\.managedObjectContext) var moc    
     var darkModeToggle: Binding<Bool>
     
@@ -19,22 +19,12 @@ struct SettingsView: View {
     var body: some View {
         VStack {
             NavigationStack {
-//                HStack {
-//                    Text("Innstillinger")
-//                    Spacer()
-//                }
-//                .padding(.leading, 20)
-//                .font(.title)
-//                .fontWeight(.bold)
-//                
-                
                 List {
                     Section {
                         NavigationLink {
                             ManageAreasView()
                         } label: {
                             Label("Redigere landområder", systemImage: "globe")
-                            //                                .foregroundStyle(.blue)
                         }
                         NavigationLink {
                             ManageCategoryView()
@@ -53,9 +43,6 @@ struct SettingsView: View {
                                 // TODO: Improve this. It doesn't alwasy save correctly
                                 UserDefaults.standard.set(darkModeToggle.wrappedValue, forKey: "DarkModeToggle")
                             }
-                        
-//                            .preferredColorScheme(darkModeToggle.wrappedValue ? .dark : .light)
-                        // TODO: save darkModeToggle as Keychain or Codable to keep persitency
                     }
                     Section {
                         
@@ -70,10 +57,6 @@ struct SettingsView: View {
                 .navigationTitle("Innstillinger")
             }
         }
-//        .onDisappear {
-//            let defaults = UserDefaults.standard
-//            defaults.set(darkModeToggle, forKey: "DarkOrLightMode")
-//        }
     }
 }
 

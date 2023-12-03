@@ -102,17 +102,13 @@ struct SearchView: View {
         area.name = recipe.wrappedValue.recipeArea
         category.name = recipe.wrappedValue.recipeCategory
         ingredient1.name = recipe.wrappedValue.recipeIngredient1
-//        ingredient2.name = recipe.wrappedValue.recipeIngredient2
-//        ingredient3.name = recipe.wrappedValue.recipeIngredient3
-        // TODO: Change it so that ALL the ingredients are converted and added
         
         meal.name = recipe.wrappedValue.recipeName
         meal.imageUrl = recipe.wrappedValue.recipeImage
         meal.isFavorited = recipe.wrappedValue.recipeIsFavorited
-//        meal.isArchived = recipe.wrappedValue.recipeIsArchived
+        meal.instructions = recipe.wrappedValue.recipeInstructions
         meal.area = area
         meal.category = category
-//        meal.ingredient = [ingredient1, ingredient2, ingredient3]
         meal.ingredient = ingredient1
         
         moc.saveAndPrintError()
@@ -130,6 +126,7 @@ struct SearchView: View {
                 .padding(.horizontal)
                 
                 HStack {
+                    Spacer()
                     Menu {
                         ForEach(savedAreas) { area in
                             Button {
@@ -143,6 +140,7 @@ struct SearchView: View {
                             .resizable()
                             .modifier(DropdownIconStyle())
                     }
+                    .padding(.horizontal, 2)
                     Menu {
                         ForEach(savedCategories) { category in
                             Button {
@@ -156,6 +154,7 @@ struct SearchView: View {
                             .resizable()
                             .modifier(DropdownIconStyle())
                     }
+                    .padding(.horizontal, 2)
                     Menu {
                         ForEach(savedIngredients) { ingredient in
                             Button {
@@ -169,7 +168,10 @@ struct SearchView: View {
                             .resizable()
                             .modifier(DropdownIconStyle())
                     }
+                    .padding(.horizontal, 2)
                 }
+                .padding()
+                .background(.gray.opacity(0.5))
                 
                 HStack {
                     TextField("Søk...", text: $searchInput)

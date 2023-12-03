@@ -13,7 +13,6 @@ struct AddNewButton: View {
     
     var body: some View {
         Button {
-//            isShowingAddNewArea = true
             isShowingAddNew.wrappedValue = true
         } label: {
             HStack {

@@ -13,16 +13,13 @@ struct UpdateRecipeView: View {
     init(recipe: Binding<Recipe>, refreshSavedRecipes: @escaping (() -> ())) {
         self.recipe = recipe
         self.refreshSavedRecipes = refreshSavedRecipes
-//        self.isPresented = isPresented
     }
     
     let recipe: Binding<Recipe>
+    
     @Environment(\.managedObjectContext) var moc
     @FetchRequest(sortDescriptors: [.init(key: "name", ascending: true)]) var savedAreas: FetchedResults<Area>
     @FetchRequest(sortDescriptors: [.init(key: "name", ascending: true)]) var savedCategories: FetchedResults<Category>
-//    @FetchRequest(sortDescriptors: [.init(key: "name", ascending: true)]) var savedMeals: FetchedResults<Meal>
-    
-//    var isPresented: Binding<Bool>
     @Environment(\.dismiss) var dismiss
     
     var refreshSavedRecipes: (() -> ())
@@ -36,7 +33,6 @@ struct UpdateRecipeView: View {
     func fetchMealByName(recipe: Binding<Recipe>) -> [Meal] {
         
         let request = NSFetchRequest<Meal>(entityName: "Meal")
-//        let name = recipe.wrappedValue.recipeName
         let predicate = NSPredicate(format: "name == %@", recipe.wrappedValue.recipeName)
         request.predicate = predicate
         
@@ -61,9 +57,6 @@ struct UpdateRecipeView: View {
         }
         
         moc.saveAndPrintError()
-        
-//        isPresented.wrappedValue = false
-        refreshSavedRecipes()
         dismiss()
     }
     
@@ -74,7 +67,7 @@ struct UpdateRecipeView: View {
                 image
                     .resizable()
                     .aspectRatio(contentMode: .fit)
-                    .frame(width: 300)
+                    .frame(width: 220)
             } placeholder: {
                 Color.gray
             }
@@ -91,13 +84,25 @@ struct UpdateRecipeView: View {
                     Text("Hoved ingredient: \(recipe.wrappedValue.recipeIngredient1 ?? "")")
                 }
                 
+                NavigationStack {
+                    Section {
+                        NavigationLink {
+                            ScrollView {
+                                Text("\(recipe.wrappedValue.recipeInstructions ?? "Ingen instruksjoner tilgjengelig")")
+                                    .padding()
+                            }
+                        } label: {
+                            Text("Instruksjoner")
+                        }
+                    }
+                }
+                
                 Section("Oppdater oppskrift") {
                     TextField("Navn...", text: $newName)
                     Menu {
                         ForEach(savedAreas) { area in
                             Button {
                                 newArea = area.name!
-//                                print(newArea)
                             } label: {
                                 Text("\(area.name!)")
                             }
@@ -114,7 +119,6 @@ struct UpdateRecipeView: View {
                                 Text("\(category.name!)")
                             }
                         }
-
                     } label: {
                         Text("Kategori")
                     }
@@ -131,9 +135,6 @@ struct UpdateRecipeView: View {
             newName = recipe.wrappedValue.recipeName
             newArea = recipe.wrappedValue.recipeArea ?? ""
             newCategory = recipe.wrappedValue.recipeCategory ?? ""
-//            newIngredients = [recipe.wrappedValue.recipeIngredient1!,
-//                              recipe.wrappedValue.recipeIngredient2!,
-//                              recipe.wrappedValue.recipeIngredient3!]
             newIngredients = recipe.wrappedValue.recipeIngredient1 ?? ""
         }
         .onDisappear {

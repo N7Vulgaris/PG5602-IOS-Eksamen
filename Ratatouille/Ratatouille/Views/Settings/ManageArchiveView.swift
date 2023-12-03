@@ -16,8 +16,6 @@ struct ManageArchiveView: View {
     }
     
     @Environment(\.managedObjectContext) var moc
-//    @FetchRequest(sortDescriptors: [.init(key: "name", ascending: true)]) var savedMeals: FetchedResults<Meal>
-//    @FetchRequest(sortDescriptors: [.init(key: "name", ascending: true)]) var archivedMeals: FetchedResults<ArchivedMeal>
     
     var savedRecipes: Binding<[Recipe]>
     var archivedRecipes: Binding<[Recipe]>
@@ -37,12 +35,9 @@ struct ManageArchiveView: View {
         
         let requestedMeal = fetchMealByName(recipe: mealToRestore)
         
-        // Add to saved DB
         let entity = NSEntityDescription.entity(forEntityName: "Meal", in: moc)!
-        // Remove from archive DB
+
         for meal in requestedMeal {
-            
-//            print(meal.name)
             
             let newMeal = Meal(entity: entity, insertInto: moc)
             newMeal.name = meal.name
@@ -57,9 +52,8 @@ struct ManageArchiveView: View {
         moc.saveAndPrintError()
     
         var hasRemoved = false
-        // Add to archive array
+        
         savedRecipes.wrappedValue.append(mealToRestore.wrappedValue)
-        // Remove from saved array
         archivedRecipes.wrappedValue.removeAll { recipeToRemove in
             if recipeToRemove.recipeName == mealToRestore.wrappedValue.recipeName, hasRemoved == false {
                 hasRemoved = true
@@ -72,7 +66,6 @@ struct ManageArchiveView: View {
     func fetchMealByName(recipe: Binding<Recipe>) -> [ArchivedMeal] {
         
         let request = NSFetchRequest<ArchivedMeal>(entityName: "ArchivedMeal")
-        //        let name = recipe.wrappedValue.recipeName
         let predicate = NSPredicate(format: "name == %@", recipe.wrappedValue.recipeName)
         request.predicate = predicate
         

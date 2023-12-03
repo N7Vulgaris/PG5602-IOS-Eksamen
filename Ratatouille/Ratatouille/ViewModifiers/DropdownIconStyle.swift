@@ -15,7 +15,3 @@ struct DropdownIconStyle: ViewModifier {
             .frame(width: 30)
     }
 }
-
-//#Preview {
-//    DropdownIconStyle()
-//}

@@ -18,12 +18,8 @@ class DataController: ObservableObject {
             if let error = error {
                 print("Error loading Core Data: \(error)")
             }
-            print(description) // <- DB filepath
         }
-//        getMeals()
     }
-    
-//    static let shared = DataController()
     
     func getMeals() -> [Meal] {
         
@@ -36,23 +32,5 @@ class DataController: ObservableObject {
             print("Error fetching: \(error)")
         }
         return fetchedMeals
-    }
-    
-//    func addMeal() {
-//        
-//        let newMeal = Meal(context: container.viewContext)
-//        newMeal.category?.name = ""
-//        
-//        saveData()
-//        
-//    }
-//    
-//    func saveData() {
-//        do {
-//            try container.viewContext.save()
-//        } catch let error {
-//            print("Error saving: \(error)")
-//        }
-//    }
-    
+    }    
 }

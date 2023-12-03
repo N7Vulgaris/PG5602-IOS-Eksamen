@@ -28,20 +28,12 @@ struct SearchListItemView: View {
             .frame(width: 60)
             .mask(Circle())
 
-            
             VStack(alignment: .leading) {
                 Text("\(recipe.wrappedValue.recipeName)")
                 Divider()
                 Text("\(recipe.wrappedValue.recipeCategory!)")
                 }
             Spacer()
-            
-//            if recipe.wrappedValue.recipeIsFavorited == true {
-//                Image(systemName: "star.fill")
-//                    .padding(.horizontal)
-//                    .foregroundStyle(.yellow)
-//            }
-            
         }
         .padding(.vertical)
     }

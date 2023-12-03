@@ -15,7 +15,6 @@ struct MyRecipesView: View {
         self.archivedRecipes = archivedRecipes
     }
     
-    // TODO: Figure out if I use @State or @Binding
     var savedRecipes: Binding<[Recipe]>
     var archivedRecipes: Binding<[Recipe]>
     
@@ -28,9 +27,8 @@ struct MyRecipesView: View {
     func archiveRecipe(recipe: Binding<Recipe>) {
         
         let requestedMeal = fetchMealByName(recipe: recipe)
-        // Add to archive DB
         let entity = NSEntityDescription.entity(forEntityName: "ArchivedMeal", in: moc)!
-        // Remove from saved DB
+        
         for meal in requestedMeal {
             
             let mealToArchive = ArchivedMeal(entity: entity, insertInto: moc)
@@ -39,6 +37,7 @@ struct MyRecipesView: View {
             mealToArchive.category = meal.category?.name
             mealToArchive.imageUrl = meal.imageUrl
             mealToArchive.isFavorited = meal.isFavorited
+            mealToArchive.instructions = meal.instructions
             
             moc.delete(meal)
         }
@@ -46,9 +45,8 @@ struct MyRecipesView: View {
         moc.saveAndPrintError()
     
         var hasRemoved = false
-        // Add to archive array
+        
         archivedRecipes.wrappedValue.append(recipe.wrappedValue)
-        // Remove from saved array
         savedRecipes.wrappedValue.removeAll { recipeToRemove in
             if recipeToRemove.recipeName == recipe.wrappedValue.recipeName, hasRemoved == false {
                 hasRemoved = true
@@ -74,7 +72,6 @@ struct MyRecipesView: View {
     func fetchMealByName(recipe: Binding<Recipe>) -> [Meal] {
         
         let request = NSFetchRequest<Meal>(entityName: "Meal")
-        //        let name = recipe.wrappedValue.recipeName
         let predicate = NSPredicate(format: "name == %@", recipe.wrappedValue.recipeName)
         request.predicate = predicate
         
@@ -90,7 +87,7 @@ struct MyRecipesView: View {
     
     func getRecipesFromDb() {
         for meal in savedMeals {
-            let newMeal = Recipe.init(recipeName: meal.name!, recipeImage: meal.imageUrl, recipeCategory: meal.category?.name, recipeArea: meal.area?.name, recipeInstructions: "", recipeIngredient1: meal.ingredient?.name, recipeIsFavorited: meal.isFavorited)
+            let newMeal = Recipe.init(recipeName: meal.name ?? "N/A", recipeImage: meal.imageUrl, recipeCategory: meal.category?.name, recipeArea: meal.area?.name, recipeInstructions: meal.instructions, recipeIngredient1: meal.ingredient?.name, recipeIsFavorited: meal.isFavorited)
             
             if !savedRecipes.wrappedValue.contains(where: { $0.recipeName == newMeal.recipeName }) {
                 savedRecipes.wrappedValue.append(newMeal)
@@ -101,35 +98,22 @@ struct MyRecipesView: View {
     
     func getArchiveFromDb() {
         for meal in archivedMeals {
-//            let newMeal = Recipe.init(recipeName: meal.name!, recipeImage: meal.imageUrl, recipeCategory: meal.category?.name, recipeArea: meal.area?.name, recipeInstructions: "", recipeIngredient1: "", recipeIngredient2: "", recipeIngredient3: "", recipeIsFavorited: meal.isFavorited)
             
-            let newMeal = Recipe.init(recipeName: meal.name ?? "", recipeImage: meal.imageUrl, recipeCategory: meal.category, recipeArea: meal.area, recipeInstructions: "", recipeIngredient1: meal.ingredient, recipeIsFavorited: meal.isFavorited)
+            let newMeal = Recipe.init(recipeName: meal.name ?? "N/A", recipeImage: meal.imageUrl, recipeCategory: meal.category, recipeArea: meal.area, recipeInstructions: meal.instructions, recipeIngredient1: meal.ingredient, recipeIsFavorited: meal.isFavorited)
             
             if !archivedRecipes.wrappedValue.contains(where: { $0.recipeName == newMeal.recipeName }) {
                 archivedRecipes.wrappedValue.append(newMeal)
             }
         }
     }
-    
-//    func deleteAllDB() {
-//        for meal in savedMeals {
-//            moc.delete(meal)
-//        }
-//        for meal in archivedMeals {
-//            moc.delete(meal)
-//        }
-//        moc.saveAndPrintError()
-//    }
-    
+        
     var body: some View {
         VStack {
-            //            Text("Ratatouille")
-            //            Spacer()
-            Button {
-//                deleteAllDB()
-            } label: {
-                Text("Delete all")
-            }
+            Text("Resturant Ratatouille!")
+                .font(.largeTitle)
+                .fontWeight(.bold)
+            
+            Spacer()
             
             if savedRecipes.wrappedValue.isEmpty {
                 VStack {
@@ -145,7 +129,6 @@ struct MyRecipesView: View {
                     List {
                         ForEach(savedRecipes) { recipe in
                                 NavigationLink {
-//                                    isPresentingUpdateView = true
                                     UpdateRecipeView(recipe: recipe, refreshSavedRecipes: {
                                         getRecipesFromDb()
                                     })
@@ -168,15 +151,12 @@ struct MyRecipesView: View {
                                             })
                                         }
                                 }
-//                                .sheet(isPresented: $isPresentingUpdateView) {
-//                                    UpdateRecipeView(recipe: recipe, isPresented: $isPresentingUpdateView)
-//                                }
-                                
                         }
                     }
                     .navigationTitle("Matoppskrifter")
                 }
             }
+            Spacer()
         }
         .onAppear {
             getRecipesFromDb()

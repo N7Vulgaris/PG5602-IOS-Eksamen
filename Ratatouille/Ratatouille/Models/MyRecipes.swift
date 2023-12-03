@@ -26,12 +26,8 @@ struct Recipe: Identifiable, Codable {
     let recipeArea: String?
     let recipeInstructions: String?
     let recipeIngredient1: String?
-//    let recipeIngredient2: String?
-//    let recipeIngredient3: String?
-//    let recipeIngredients: [String]
     
     var recipeIsFavorited: Bool = false
-//    var recipeIsArchived: Bool = false
     
     enum CodingKeys: String, CodingKey {
         case recipeName = "strMeal"
@@ -40,8 +36,6 @@ struct Recipe: Identifiable, Codable {
         case recipeArea = "strArea"
         case recipeInstructions = "strInstructions"
         case recipeIngredient1 = "strIngredient1"
-//        case recipeIngredient2 = "strIngredient2"
-//        case recipeIngredient3 = "strIngredient3"
     }
 }
 

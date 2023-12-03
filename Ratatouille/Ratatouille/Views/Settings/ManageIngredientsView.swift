@@ -28,8 +28,6 @@ struct ManageIngredientsView: View {
         isShowingAddNewIngredient = false
     }
 
-    
-    
     var body: some View {
         VStack {
             AddNewButton(isShowingAddNew: $isShowingAddNewIngredient)

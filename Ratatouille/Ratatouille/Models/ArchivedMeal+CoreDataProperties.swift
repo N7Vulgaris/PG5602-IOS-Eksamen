@@ -22,6 +22,7 @@ extension ArchivedMeal {
     @NSManaged public var ingredient: String?
     @NSManaged public var isFavorited: Bool
     @NSManaged public var name: String?
+    @NSManaged public var instructions: String?
 
 }
 

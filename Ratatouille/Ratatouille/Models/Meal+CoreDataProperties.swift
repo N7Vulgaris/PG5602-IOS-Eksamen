@@ -19,6 +19,7 @@ extension Meal {
     @NSManaged public var imageUrl: String?
     @NSManaged public var isFavorited: Bool
     @NSManaged public var name: String?
+    @NSManaged public var instructions: String?
     @NSManaged public var area: Area?
     @NSManaged public var category: Category?
     @NSManaged public var ingredient: Ingredient?

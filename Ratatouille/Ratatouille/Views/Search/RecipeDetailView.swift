@@ -25,8 +25,6 @@ struct RecipeDetailView: View {
                 } placeholder: {
                     Color.gray
                 }
-                //            .frame(width: 60)
-                //            .mask(Rectangle())
                 .mask(RoundedRectangle(cornerSize: CGSize(width: 20, height: 10)))
                 .padding(.horizontal)
                 
@@ -36,8 +34,6 @@ struct RecipeDetailView: View {
                     Text("Landområde: \(recipe.wrappedValue.recipeArea!)")
                     Text("Ingredienser:")
                     Text("\(recipe.wrappedValue.recipeIngredient1!)")
-//                    Text("\(recipe.wrappedValue.recipeIngredient2!)")
-//                    Text("\(recipe.wrappedValue.recipeIngredient3!)")
                 }
                 .padding(.leading, 40)
                 .padding(.top, 10)
@@ -48,10 +44,7 @@ struct RecipeDetailView: View {
                     
                     ZStack {
                         NavigationLink {
-                            //                        RecipeInstructionsView(recipeInstructions: recipe.wrappedValue.recipeInstructions)
-                            ZStack {
-                                Color.gray.opacity(0.3)
-                                    .ignoresSafeArea()
+                            ScrollView {
                                 Text("\(recipe.wrappedValue.recipeInstructions ?? "")")
                                     .padding(.horizontal, 50)
                                     .font(.title3)
@@ -64,9 +57,7 @@ struct RecipeDetailView: View {
                         
                     }
                 }
-                
                 Spacer()
-                
             }
         }
     }

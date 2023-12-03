@@ -10,6 +10,8 @@ import SwiftUI
 struct SplashScreenView: View {
     @State private var size = 0.8
     @State private var opacity = 0.5
+    @State private var rotateDegree = 0.0
+    
     var isActive: Binding<Bool>
     
     init(isActive: Binding<Bool>) {
@@ -23,15 +25,18 @@ struct SplashScreenView: View {
                     .ignoresSafeArea()
                 VStack {
                     VStack {
-                        Image(systemName: "hare.fill")
-                            .font(.system(size: 80))
-                            .foregroundColor(.red)
+                        Image("ratatouille")
+                            .resizable()
+                            .aspectRatio(contentMode: .fit)
+                            .padding()
                     }
+                    .rotationEffect(Angle(degrees: rotateDegree))
                     .scaleEffect(size)
                     .opacity(opacity)
                     .onAppear {
-                        withAnimation(.easeIn(duration: 1.2)) {
-                            self.size = 0.9
+                        withAnimation(.easeIn(duration: 2.0)) {
+                            self.rotateDegree = 45.0
+                            self.size = 1.2
                             self.opacity = 1.0
                         }
                     }
