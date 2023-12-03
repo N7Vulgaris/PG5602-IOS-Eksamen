@@ -34,3 +34,14 @@ class DataController: ObservableObject {
         return fetchedMeals
     }    
 }
+
+extension NSManagedObjectContext {
+    func saveAndPrintError() {
+        do {
+            try self.save()
+        } catch let error {
+            print(error)
+        }
+    }
+}
+

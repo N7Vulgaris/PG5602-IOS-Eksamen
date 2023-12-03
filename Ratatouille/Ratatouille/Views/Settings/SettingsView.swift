@@ -40,12 +40,10 @@ struct SettingsView: View {
                     Section {
                         Toggle("Akriver mørk modus", systemImage: "moon.circle", isOn: darkModeToggle)
                             .onChange(of: darkModeToggle.wrappedValue) {
-                                // TODO: Improve this. It doesn't alwasy save correctly
                                 UserDefaults.standard.set(darkModeToggle.wrappedValue, forKey: "DarkModeToggle")
                             }
                     }
                     Section {
-                        
                         NavigationLink {
                             ManageArchiveView(savedRecipes: savedRecipes, archivedRecipes: archivedRecipes)
                         } label: {

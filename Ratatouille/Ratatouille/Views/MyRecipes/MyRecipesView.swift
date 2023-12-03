@@ -80,7 +80,7 @@ struct MyRecipesView: View {
         do {
             requestedMeal = try moc.fetch(request)
         } catch let error {
-            print(error)
+            print("Error fetching recipe from DB: \(error)")
         }
         return requestedMeal
     }
@@ -93,7 +93,6 @@ struct MyRecipesView: View {
                 savedRecipes.wrappedValue.append(newMeal)
             }
         }
-        print("Wahoo!")
     }
     
     func getArchiveFromDb() {
@@ -129,9 +128,7 @@ struct MyRecipesView: View {
                     List {
                         ForEach(savedRecipes) { recipe in
                                 NavigationLink {
-                                    UpdateRecipeView(recipe: recipe, refreshSavedRecipes: {
-                                        getRecipesFromDb()
-                                    })
+                                    UpdateRecipeView(recipe: recipe)
                                 } label: {
                                     RecipeListItemView(recipe: recipe)
                                         .swipeActions(edge: .leading, allowsFullSwipe: true) {

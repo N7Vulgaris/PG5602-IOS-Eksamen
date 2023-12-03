@@ -10,9 +10,9 @@ import CoreData
 
 struct UpdateRecipeView: View {
     
-    init(recipe: Binding<Recipe>, refreshSavedRecipes: @escaping (() -> ())) {
+    init(recipe: Binding<Recipe>) {
         self.recipe = recipe
-        self.refreshSavedRecipes = refreshSavedRecipes
+//        self.refreshSavedRecipes = refreshSavedRecipes
     }
     
     let recipe: Binding<Recipe>
@@ -20,14 +20,15 @@ struct UpdateRecipeView: View {
     @Environment(\.managedObjectContext) var moc
     @FetchRequest(sortDescriptors: [.init(key: "name", ascending: true)]) var savedAreas: FetchedResults<Area>
     @FetchRequest(sortDescriptors: [.init(key: "name", ascending: true)]) var savedCategories: FetchedResults<Category>
+    @FetchRequest(sortDescriptors: [.init(key: "name", ascending: true)]) var savedIngredients: FetchedResults<Ingredient>
     @Environment(\.dismiss) var dismiss
     
-    var refreshSavedRecipes: (() -> ())
+//    var refreshSavedRecipes: (() -> ())
     
     @State var newName: String = ""
     @State var newArea: String = ""
     @State var newCategory: String = ""
-    @State var newIngredients: String = ""
+    @State var newIngredient: String = ""
     
     
     func fetchMealByName(recipe: Binding<Recipe>) -> [Meal] {
@@ -41,7 +42,7 @@ struct UpdateRecipeView: View {
         do {
             requestedMeal = try moc.fetch(request)
         } catch let error {
-            print(error)
+            print("Error fetching recipe from DB: \(error)")
         }
         return requestedMeal
     }
@@ -54,6 +55,7 @@ struct UpdateRecipeView: View {
             meal.name = newName
             meal.area?.name = newArea
             meal.category?.name = newCategory
+            meal.ingredient?.name = newIngredient
         }
         
         moc.saveAndPrintError()
@@ -114,13 +116,23 @@ struct UpdateRecipeView: View {
                         ForEach(savedCategories) { category in
                             Button {
                                 newCategory = category.name!
-                                print(newCategory)
                             } label: {
                                 Text("\(category.name!)")
                             }
                         }
                     } label: {
                         Text("Kategori")
+                    }
+                    Menu {
+                        ForEach(savedIngredients) { ingredient in
+                            Button {
+                                newIngredient = ingredient.name!
+                            } label: {
+                                Text("\(ingredient.name!)")
+                            }
+                        }
+                    } label: {
+                        Text("Ingredienser")
                     }
                 }
                 Button {
@@ -135,7 +147,7 @@ struct UpdateRecipeView: View {
             newName = recipe.wrappedValue.recipeName
             newArea = recipe.wrappedValue.recipeArea ?? ""
             newCategory = recipe.wrappedValue.recipeCategory ?? ""
-            newIngredients = recipe.wrappedValue.recipeIngredient1 ?? ""
+            newIngredient = recipe.wrappedValue.recipeIngredient1 ?? ""
         }
         .onDisappear {
             moc.refreshAllObjects()
@@ -144,7 +156,5 @@ struct UpdateRecipeView: View {
 }
 
 #Preview {
-    UpdateRecipeView(recipe: .constant(MyRecipes.demoRecipe)) {
-        print("Refresh")
-    }
+    UpdateRecipeView(recipe: .constant(MyRecipes.demoRecipe))
 }

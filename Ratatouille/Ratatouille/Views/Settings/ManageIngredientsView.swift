@@ -16,6 +16,8 @@ struct ManageIngredientsView: View {
     @State var newIngredientName: String = ""
     @State var addNewText: String = "Ny Ingrediens"
     
+    @State var isPresentingDeleteAlert: Bool = false
+    
     func deleteIngredient(ingredientToDelete: Ingredient) {
         moc.delete(ingredientToDelete)
         moc.saveAndPrintError()
@@ -27,18 +29,50 @@ struct ManageIngredientsView: View {
         moc.saveAndPrintError()
         isShowingAddNewIngredient = false
     }
+    
+    func no() {
+        isPresentingDeleteAlert = false
+    }
+    
+    func deleteAllIngredients() {
+        for ingredient in savedIngredients {
+            moc.delete(ingredient)
+        }
+        
+        moc.saveAndPrintError()
+    }
 
     var body: some View {
         VStack {
-            AddNewButton(isShowingAddNew: $isShowingAddNewIngredient)
-            .sheet(isPresented: $isShowingAddNewIngredient, content: {
-                AddNewView(textFieldText: $addNewText, newObjectName: $newIngredientName)
+            
+            HStack {
                 Button {
-                    addNewIngredient(newIngredient: newIngredientName)
+                    isPresentingDeleteAlert = true
                 } label: {
-                    Text("Legg til ny ingrediens")
+                    Text("Slett alle")
                 }
-            })
+                .padding()
+                .buttonStyle(.borderedProminent)
+                .alert(isPresented: $isPresentingDeleteAlert, content: {
+                    Alert(title: Text("Er du sikker?"), primaryButton: .default(
+                    Text("Nei"),
+                    action: no
+                    ), secondaryButton: .destructive(
+                        Text("Ja"),
+                    action: deleteAllIngredients
+                    ))
+                })
+                
+                AddNewButton(isShowingAddNew: $isShowingAddNewIngredient)
+                    .sheet(isPresented: $isShowingAddNewIngredient, content: {
+                        AddNewView(textFieldText: $addNewText, newObjectName: $newIngredientName)
+                        Button {
+                            addNewIngredient(newIngredient: newIngredientName)
+                        } label: {
+                            Text("Legg til ny ingrediens")
+                        }
+                    })
+            }
             
             List {
                 ForEach(savedIngredients) { ingredient in

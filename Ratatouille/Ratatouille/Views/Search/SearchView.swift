@@ -38,7 +38,7 @@ struct SearchView: View {
                 }
                 
             } catch let error {
-                print(error)
+                print("Error fetching recipes from API: \(error)")
             }
         }
     }
@@ -54,7 +54,7 @@ struct SearchView: View {
                 }
                 
             } catch let error {
-                print(error)
+                print("Error fetching recipes from API: \(error)")
             }
         }
     }
@@ -70,7 +70,7 @@ struct SearchView: View {
                 }
                 
             } catch let error {
-                print(error)
+                print("Error fetching recipes: from API \(error)")
             }
         }
     }
@@ -86,7 +86,7 @@ struct SearchView: View {
                 }
                 
             } catch let error {
-                print(error)
+                print("Error fetching recipes from API: \(error)")
             }
         }
     }
@@ -140,7 +140,7 @@ struct SearchView: View {
                             .resizable()
                             .modifier(DropdownIconStyle())
                     }
-                    .padding(.horizontal, 2)
+                    .padding(.horizontal, 10)
                     Menu {
                         ForEach(savedCategories) { category in
                             Button {
@@ -154,7 +154,7 @@ struct SearchView: View {
                             .resizable()
                             .modifier(DropdownIconStyle())
                     }
-                    .padding(.horizontal, 2)
+                    .padding(.horizontal, 10)
                     Menu {
                         ForEach(savedIngredients) { ingredient in
                             Button {
@@ -168,10 +168,10 @@ struct SearchView: View {
                             .resizable()
                             .modifier(DropdownIconStyle())
                     }
-                    .padding(.horizontal, 2)
+                    .padding(.horizontal, 10)
                 }
                 .padding()
-                .background(.gray.opacity(0.5))
+
                 
                 HStack {
                     TextField("Søk...", text: $searchInput)
@@ -184,7 +184,6 @@ struct SearchView: View {
                     }
                 }
                 .padding(.horizontal)
-                
                 
                 List {
                     ForEach($searchResult.recipes) { recipe in
@@ -212,14 +211,4 @@ struct SearchView: View {
 
 #Preview {
     SearchView(savedRecipes: .constant( [Recipe]() ))
-}
-
-extension NSManagedObjectContext {
-    func saveAndPrintError() {
-        do {
-            try self.save()
-        } catch let error {
-            print(error)
-        }
-    }
 }

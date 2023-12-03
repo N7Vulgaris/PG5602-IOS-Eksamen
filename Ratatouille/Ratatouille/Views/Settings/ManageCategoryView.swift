@@ -17,6 +17,8 @@ struct ManageCategoryView: View {
     @State var newCategoryName: String = ""
     @State var addNewText: String = "Ny Kategori"
     
+    @State var isPresentingDeleteAlert: Bool = false
+    
     func deleteCategory(categoryToDelete: Category) {
         moc.delete(categoryToDelete)
         moc.saveAndPrintError()
@@ -29,18 +31,50 @@ struct ManageCategoryView: View {
         isShowingAddNewCategory = false
     }
     
+    func no() {
+        isPresentingDeleteAlert = false
+    }
+    
+    func deleteAllCategories() {
+        for category in savedCategories {
+            moc.delete(category)
+        }
+        
+        moc.saveAndPrintError()
+    }
+    
     var body: some View {
         VStack {
             
-            AddNewButton(isShowingAddNew: $isShowingAddNewCategory)
-            .sheet(isPresented: $isShowingAddNewCategory, content: {
-                AddNewView(textFieldText: $addNewText, newObjectName: $newCategoryName)
+            HStack {
+                
                 Button {
-                    addNewCategory(newCategory: newCategoryName)
+                    isPresentingDeleteAlert = true
                 } label: {
-                    Text("Legg til ny kategori")
+                    Text("Slett alle")
                 }
-            })
+                .padding()
+                .buttonStyle(.borderedProminent)
+                .alert(isPresented: $isPresentingDeleteAlert, content: {
+                    Alert(title: Text("Er du sikker?"), primaryButton: .default(
+                    Text("Nei"),
+                    action: no
+                    ), secondaryButton: .destructive(
+                        Text("Ja"),
+                    action: deleteAllCategories
+                    ))
+                })
+                
+                AddNewButton(isShowingAddNew: $isShowingAddNewCategory)
+                    .sheet(isPresented: $isShowingAddNewCategory, content: {
+                        AddNewView(textFieldText: $addNewText, newObjectName: $newCategoryName)
+                        Button {
+                            addNewCategory(newCategory: newCategoryName)
+                        } label: {
+                            Text("Legg til ny kategori")
+                        }
+                    })
+            }
             
             List {
                 ForEach(savedCategories) { category in

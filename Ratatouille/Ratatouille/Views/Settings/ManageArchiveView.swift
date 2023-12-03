@@ -74,7 +74,7 @@ struct ManageArchiveView: View {
         do {
             requestedMeal = try moc.fetch(request)
         } catch let error {
-            print(error)
+            print("Error fetching meal from DB: \(error)")
         }
         
         return requestedMeal
