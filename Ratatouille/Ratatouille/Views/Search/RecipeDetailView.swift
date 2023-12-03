@@ -36,8 +36,8 @@ struct RecipeDetailView: View {
                     Text("Landområde: \(recipe.wrappedValue.recipeArea!)")
                     Text("Ingredienser:")
                     Text("\(recipe.wrappedValue.recipeIngredient1!)")
-                    Text("\(recipe.wrappedValue.recipeIngredient2!)")
-                    Text("\(recipe.wrappedValue.recipeIngredient3!)")
+//                    Text("\(recipe.wrappedValue.recipeIngredient2!)")
+//                    Text("\(recipe.wrappedValue.recipeIngredient3!)")
                 }
                 .padding(.leading, 40)
                 .padding(.top, 10)

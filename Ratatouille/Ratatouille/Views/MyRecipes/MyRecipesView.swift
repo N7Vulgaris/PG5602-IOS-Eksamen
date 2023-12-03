@@ -90,7 +90,7 @@ struct MyRecipesView: View {
     
     func getRecipesFromDb() {
         for meal in savedMeals {
-            let newMeal = Recipe.init(recipeName: meal.name!, recipeImage: meal.imageUrl, recipeCategory: meal.category?.name, recipeArea: meal.area?.name, recipeInstructions: "", recipeIngredient1: "", recipeIngredient2: "", recipeIngredient3: "", recipeIsFavorited: meal.isFavorited)
+            let newMeal = Recipe.init(recipeName: meal.name!, recipeImage: meal.imageUrl, recipeCategory: meal.category?.name, recipeArea: meal.area?.name, recipeInstructions: "", recipeIngredient1: meal.ingredient?.name, recipeIsFavorited: meal.isFavorited)
             
             if !savedRecipes.wrappedValue.contains(where: { $0.recipeName == newMeal.recipeName }) {
                 savedRecipes.wrappedValue.append(newMeal)
@@ -103,7 +103,7 @@ struct MyRecipesView: View {
         for meal in archivedMeals {
 //            let newMeal = Recipe.init(recipeName: meal.name!, recipeImage: meal.imageUrl, recipeCategory: meal.category?.name, recipeArea: meal.area?.name, recipeInstructions: "", recipeIngredient1: "", recipeIngredient2: "", recipeIngredient3: "", recipeIsFavorited: meal.isFavorited)
             
-            let newMeal = Recipe.init(recipeName: meal.name ?? "", recipeImage: meal.imageUrl, recipeCategory: meal.category, recipeArea: meal.area, recipeInstructions: "", recipeIngredient1: "", recipeIngredient2: "", recipeIngredient3: "", recipeIsFavorited: meal.isFavorited)
+            let newMeal = Recipe.init(recipeName: meal.name ?? "", recipeImage: meal.imageUrl, recipeCategory: meal.category, recipeArea: meal.area, recipeInstructions: "", recipeIngredient1: meal.ingredient, recipeIsFavorited: meal.isFavorited)
             
             if !archivedRecipes.wrappedValue.contains(where: { $0.recipeName == newMeal.recipeName }) {
                 archivedRecipes.wrappedValue.append(newMeal)

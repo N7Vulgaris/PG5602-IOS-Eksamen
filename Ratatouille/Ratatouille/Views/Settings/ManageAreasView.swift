@@ -14,37 +14,31 @@ struct ManageAreasView: View {
     
     @State var isShowingAddNewArea: Bool = false
     @State var newAreaName: String = ""
+    @State var addNewText: String = "Nytt Område"
     
     func deleteArea(areaToDelete: Area) {
         moc.delete(areaToDelete)
         moc.saveAndPrintError()
     }
     
-    func addNewArea() {
-        
+    func addNewArea(newArea: String) {
+        let area = Area(context: moc)
+        area.name = newArea
+        moc.saveAndPrintError()
+        isShowingAddNewArea = false
     }
     
     var body: some View {
         VStack {
             
-            Button {
-                isShowingAddNewArea = true
-            } label: {
-                HStack {
-                    Spacer()
-                    ZStack {
-                        Color.blue
-                        Image(systemName: "plus")
-                            .foregroundStyle(Color.white)
-                    }
-                    .mask(Circle())
-                    .aspectRatio(contentMode: .fit)
-                    .frame(width: 70)
-                }
-                .padding(.trailing)
-            }
+            AddNewButton(isShowingAddNew: $isShowingAddNewArea)
             .sheet(isPresented: $isShowingAddNewArea, content: {
-                TextField("Nytt Område", text: $newAreaName)
+                AddNewView(textFieldText: $addNewText, newObjectName: $newAreaName)
+                Button {
+                    addNewArea(newArea: newAreaName)
+                } label: {
+                    Text("Legg til nytt område")
+                }
             })
             
             List {
@@ -58,7 +52,6 @@ struct ManageAreasView: View {
                                     .tint(.red)
                             })
                         }
-
                 }
             }
             .navigationTitle("Rediger områder")

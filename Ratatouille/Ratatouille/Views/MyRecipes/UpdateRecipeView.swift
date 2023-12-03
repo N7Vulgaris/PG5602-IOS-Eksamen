@@ -30,7 +30,7 @@ struct UpdateRecipeView: View {
     @State var newName: String = ""
     @State var newArea: String = ""
     @State var newCategory: String = ""
-    @State var newIngredients: [String] = []
+    @State var newIngredients: String = ""
     
     
     func fetchMealByName(recipe: Binding<Recipe>) -> [Meal] {
@@ -83,6 +83,14 @@ struct UpdateRecipeView: View {
             
                     
             Form {
+                
+                Section("Info") {
+                    Text("Navn: \(recipe.wrappedValue.recipeName)")
+                    Text("Område: \(recipe.wrappedValue.recipeArea ?? "")")
+                    Text("Kategori: \(recipe.wrappedValue.recipeCategory ?? "")")
+                    Text("Hoved ingredient: \(recipe.wrappedValue.recipeIngredient1 ?? "")")
+                }
+                
                 Section("Oppdater oppskrift") {
                     TextField("Navn...", text: $newName)
                     Menu {
@@ -110,16 +118,7 @@ struct UpdateRecipeView: View {
                     } label: {
                         Text("Kategori")
                     }
-//                    TextField("Område...", text: $newArea)
-//                    TextField("Kategori...", text: $newCategory)
                 }
-                
-                //            Section("Ingredienser") {
-                //                ForEach(newIngredients) { ingredient in
-                //                    TextField("", text: ingredient)
-                //                }
-                //            }
-                
                 Button {
                     updateRecipe()
                 } label: {
@@ -130,11 +129,12 @@ struct UpdateRecipeView: View {
         }
         .onAppear {
             newName = recipe.wrappedValue.recipeName
-            newArea = recipe.wrappedValue.recipeArea!
-            newCategory = recipe.wrappedValue.recipeCategory!
-            newIngredients = [recipe.wrappedValue.recipeIngredient1!,
-                              recipe.wrappedValue.recipeIngredient2!,
-                              recipe.wrappedValue.recipeIngredient3!]
+            newArea = recipe.wrappedValue.recipeArea ?? ""
+            newCategory = recipe.wrappedValue.recipeCategory ?? ""
+//            newIngredients = [recipe.wrappedValue.recipeIngredient1!,
+//                              recipe.wrappedValue.recipeIngredient2!,
+//                              recipe.wrappedValue.recipeIngredient3!]
+            newIngredients = recipe.wrappedValue.recipeIngredient1 ?? ""
         }
         .onDisappear {
             moc.refreshAllObjects()

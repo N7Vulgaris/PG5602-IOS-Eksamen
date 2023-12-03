@@ -2,7 +2,7 @@
 //  Ingredient+CoreDataClass.swift
 //  Ratatouille
 //
-//  Created by Simen Hansen on 01/12/2023.
+//  Created by Simen Hansen on 03/12/2023.
 //
 //
 

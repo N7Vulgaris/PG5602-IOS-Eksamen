@@ -69,14 +69,12 @@ struct SearchView: View {
         let area = Area(context: moc)
         let category = Category(context: moc)
         let ingredient1 = Ingredient(context: moc)
-        let ingredient2 = Ingredient(context: moc)
-        let ingredient3 = Ingredient(context: moc)
         
         area.name = recipe.wrappedValue.recipeArea
         category.name = recipe.wrappedValue.recipeCategory
         ingredient1.name = recipe.wrappedValue.recipeIngredient1
-        ingredient2.name = recipe.wrappedValue.recipeIngredient2
-        ingredient3.name = recipe.wrappedValue.recipeIngredient3
+//        ingredient2.name = recipe.wrappedValue.recipeIngredient2
+//        ingredient3.name = recipe.wrappedValue.recipeIngredient3
         // TODO: Change it so that ALL the ingredients are converted and added
         
         meal.name = recipe.wrappedValue.recipeName
@@ -85,7 +83,8 @@ struct SearchView: View {
 //        meal.isArchived = recipe.wrappedValue.recipeIsArchived
         meal.area = area
         meal.category = category
-        meal.ingredient = [ingredient1, ingredient2, ingredient3]
+//        meal.ingredient = [ingredient1, ingredient2, ingredient3]
+        meal.ingredient = ingredient1
         
         moc.saveAndPrintError()
     }
@@ -116,30 +115,26 @@ struct SearchView: View {
                             .modifier(DropdownIconStyle())
                     }
                     Menu {
-                        Button("4") {
-                            print("4")
-                        }
-                        Button("5") {
-                            print("5")
-                        }
-                        Button("6") {
-                            print("6")
-                        }
+//                        ForEach(savedCategories) { category in
+//                            Button {
+//                                getCategoryFromApi(recipeCategory: area.name!)
+//                            } label: {
+//                                Text("\(area.name ?? "")")
+//                            }
+//                        }
                     } label: {
                         Image(systemName: "rectangle.3.group.bubble")
                             .resizable()
                             .modifier(DropdownIconStyle())
                     }
                     Menu {
-                        Button("7") {
-                            print("7")
-                        }
-                        Button("8") {
-                            print("8")
-                        }
-                        Button("9") {
-                            print("9")
-                        }
+//                        ForEach(savedIngredients) { ingredient in
+//                            Button {
+//                                getIngredientsFromApi(recipeIngredient: area.name!)
+//                            } label: {
+//                                Text("\(area.name ?? "")")
+//                            }
+//                        }
                     } label: {
                         Image(systemName: "carrot.fill")
                             .resizable()
