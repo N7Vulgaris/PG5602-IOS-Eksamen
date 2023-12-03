@@ -15,6 +15,9 @@ struct SearchView: View {
     }
     
     @Environment(\.managedObjectContext) var moc
+    @FetchRequest(sortDescriptors: [.init(key: "name", ascending: true)]) var savedAreas: FetchedResults<Area>
+    @FetchRequest(sortDescriptors: [.init(key: "name", ascending: true)]) var savedCategories: FetchedResults<Category>
+    @FetchRequest(sortDescriptors: [.init(key: "name", ascending: true)]) var savedIngredients: FetchedResults<Ingredient>
     
     @State var searchInput: String = ""
     @State var searchWindowIsPresented: Bool = false
@@ -39,6 +42,26 @@ struct SearchView: View {
             }
         }
     }
+    
+    func getAreasFromApi(recipeArea: String) {
+        Task {
+            do {
+                
+                let searchResult = try await apiClient.getRecipesByArea(recipeArea)
+                
+                print(searchResult.meal)
+                
+                
+//                DispatchQueue.main.async {
+//                    self.searchResult = searchResult
+//                }
+                
+            } catch let error {
+                print(error)
+            }
+        }
+    }
+
     
     func saveRecipe(recipe: Binding<Recipe>) {
         
@@ -80,14 +103,12 @@ struct SearchView: View {
                 
                 HStack {
                     Menu {
-                        Button("1") {
-                            print("1")
-                        }
-                        Button("2") {
-                            print("2")
-                        }
-                        Button("3") {
-                            print("3")
+                        ForEach(savedAreas) { area in
+                            Button {
+                                getAreasFromApi(recipeArea: area.name!)
+                            } label: {
+                                Text("\(area.name ?? "")")
+                            }
                         }
                     } label: {
                         Image(systemName: "globe")

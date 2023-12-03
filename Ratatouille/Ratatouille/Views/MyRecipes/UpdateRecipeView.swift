@@ -89,7 +89,7 @@ struct UpdateRecipeView: View {
                         ForEach(savedAreas) { area in
                             Button {
                                 newArea = area.name!
-                                print(newArea)
+//                                print(newArea)
                             } label: {
                                 Text("\(area.name!)")
                             }

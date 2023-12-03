@@ -10,6 +10,10 @@ import SwiftUI
 struct SettingsView: View {
     
 //    @State var darkModeToggle: Bool = false
+    @Environment(\.managedObjectContext) var moc
+    @FetchRequest(sortDescriptors: [.init(key: "name", ascending: true)]) var savedCategories: FetchedResults<Category>
+    @FetchRequest(sortDescriptors: [.init(key: "name", ascending: true)]) var savedIngredients: FetchedResults<Ingredient>
+    
     var darkModeToggle: Binding<Bool>
     
     var savedRecipes: Binding<[Recipe]>
@@ -30,7 +34,7 @@ struct SettingsView: View {
                 List {
                     Section {
                         NavigationLink {
-                            Text("Landområder")
+                            ManageAreasView()
                         } label: {
                             Label("Redigere landområder", systemImage: "globe")
                             //                                .foregroundStyle(.blue)

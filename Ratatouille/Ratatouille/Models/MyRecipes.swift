@@ -45,6 +45,20 @@ struct Recipe: Identifiable, Codable {
     }
 }
 
+struct RecipeArea: Codable {
+    
+    let meal: String
+    let mealImage: String
+    let mealId: Int
+    
+    enum CodingKeys: String, CodingKey {
+        case meal = "strMeal"
+        case mealImage = "strMealThumb"
+        case mealId = "idMeal"
+    }
+    
+}
+
 extension MyRecipes {
     
     static var sampleJSON: String {
