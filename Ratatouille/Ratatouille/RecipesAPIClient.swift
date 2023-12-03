@@ -14,7 +14,7 @@ struct RecipesAPIClient {
     
     var getRecipesByCategory: ((String) async throws -> MyRecipes)
     
-    var getRecipesByArea: ((String) async throws -> RecipeArea)
+    var getRecipesByArea: ((String) async throws -> MyRecipes)
     
     var getRecipesByIngredient: ((String) async throws -> MyRecipes)
     
@@ -46,7 +46,7 @@ extension RecipesAPIClient {
         let url = URL(string: "https://www.themealdb.com/api/json/v1/1/filter.php?a=\(recipeArea)")!
         
         let (data, response) = try await URLSession.shared.data(from: url)
-        let recipes = try JSONDecoder().decode(RecipeArea.self, from: data)
+        let recipes = try JSONDecoder().decode(MyRecipes.self, from: data)
         
         return recipes
         

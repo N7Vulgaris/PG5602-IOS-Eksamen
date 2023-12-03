@@ -24,7 +24,7 @@ struct Recipe: Identifiable, Codable {
     let recipeImage: String?
     let recipeCategory: String?
     let recipeArea: String?
-    let recipeInstructions: String
+    let recipeInstructions: String?
     let recipeIngredient1: String?
 //    let recipeIngredient2: String?
 //    let recipeIngredient3: String?

@@ -49,12 +49,41 @@ struct SearchView: View {
                 
                 let searchResult = try await apiClient.getRecipesByArea(recipeArea)
                 
-                print(searchResult.meal)
+                DispatchQueue.main.async {
+                    self.searchResult = searchResult
+                }
                 
+            } catch let error {
+                print(error)
+            }
+        }
+    }
+    
+    func getCategoriesFromApi(recipeCategory: String) {
+        Task {
+            do {
                 
-//                DispatchQueue.main.async {
-//                    self.searchResult = searchResult
-//                }
+                let searchResult = try await apiClient.getRecipesByCategory(recipeCategory)
+                
+                DispatchQueue.main.async {
+                    self.searchResult = searchResult
+                }
+                
+            } catch let error {
+                print(error)
+            }
+        }
+    }
+    
+    func getIngredientsFromApi(recipeIngredient: String) {
+        Task {
+            do {
+                
+                let searchResult = try await apiClient.getRecipesByIngredient(recipeIngredient)
+                
+                DispatchQueue.main.async {
+                    self.searchResult = searchResult
+                }
                 
             } catch let error {
                 print(error)
@@ -115,26 +144,26 @@ struct SearchView: View {
                             .modifier(DropdownIconStyle())
                     }
                     Menu {
-//                        ForEach(savedCategories) { category in
-//                            Button {
-//                                getCategoryFromApi(recipeCategory: area.name!)
-//                            } label: {
-//                                Text("\(area.name ?? "")")
-//                            }
-//                        }
+                        ForEach(savedCategories) { category in
+                            Button {
+                                getCategoriesFromApi(recipeCategory: category.name!)
+                            } label: {
+                                Text("\(category.name ?? "")")
+                            }
+                        }
                     } label: {
                         Image(systemName: "rectangle.3.group.bubble")
                             .resizable()
                             .modifier(DropdownIconStyle())
                     }
                     Menu {
-//                        ForEach(savedIngredients) { ingredient in
-//                            Button {
-//                                getIngredientsFromApi(recipeIngredient: area.name!)
-//                            } label: {
-//                                Text("\(area.name ?? "")")
-//                            }
-//                        }
+                        ForEach(savedIngredients) { ingredient in
+                            Button {
+                                getIngredientsFromApi(recipeIngredient: ingredient.name!)
+                            } label: {
+                                Text("\(ingredient.name ?? "")")
+                            }
+                        }
                     } label: {
                         Image(systemName: "carrot.fill")
                             .resizable()

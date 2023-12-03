@@ -52,7 +52,7 @@ struct RecipeDetailView: View {
                             ZStack {
                                 Color.gray.opacity(0.3)
                                     .ignoresSafeArea()
-                                Text("\(recipe.wrappedValue.recipeInstructions)")
+                                Text("\(recipe.wrappedValue.recipeInstructions ?? "")")
                                     .padding(.horizontal, 50)
                                     .font(.title3)
                                     .fontWeight(.medium)
