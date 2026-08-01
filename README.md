@@ -7,6 +7,13 @@ A native iOS mobile application build with Swift and SwiftUI. Allows the user re
 The application was developed using **Swift** and **SwiftUI**.  
 **CoreData** was utilized for storing recipes in a local database in the app.
 
+## How to run
+- Open the Ratatouille project in Xcode
+- Press the play button in the top right of the file explorer:
+
+<img width="390" height="207" alt="Screenshot 2026-08-01 at 22 14 24" src="https://github.com/user-attachments/assets/738c9d5b-3dee-4c92-b0a2-ad5134d4dc15" /> <br>
+- The application will launch with the Simulator app (iPhone 17 Pro)
+
 ## Database
 The application uses a local database to store recipes that the user has added to their favorites/archive.  
 The structure of the database is as follows:
