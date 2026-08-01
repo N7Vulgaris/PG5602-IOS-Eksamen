@@ -1,7 +1,7 @@
 # Ratatouille
 
 ## Description
-This project is my delivery for an iOS Programming exam in November-December 2023 as a part of my Bachelor's degree. The purpose of the exam was to develop a mobile app that retrieves a list of food recipes from an API. The user is then able view the recipes, add them to a database of their favorites, archive them and delete them.
+A native iOS mobile application build with Swift and SwiftUI. Allows the user retrieve a list of food recipes from an API. The recipes can be viewed, added to favorites, archived and deleted.
 
 ## Technologies
 The application was developed using **Swift** and **SwiftUI**.  
